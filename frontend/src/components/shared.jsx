@@ -11,9 +11,11 @@ const LUCIDE_ICONS = {
     Network, KeyRound, Braces, Boxes, Table2, Cpu, Globe, Layers, MonitorSmartphone,
     ServerCog, Database, Wrench, Code2, GraduationCap, ShieldCheck, Lock, Cloud, Image, Gauge, CheckCircle, Mail,
 };
+// eslint-disable-next-line react-refresh/only-export-components
 export const lucideIcon = (name) => LUCIDE_ICONS[name] || Code2;
 
 /* Smooth-scroll to a section, using Lenis when available */
+// eslint-disable-next-line react-refresh/only-export-components
 export function scrollToId(id) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -186,7 +188,7 @@ export function Heatmap({ weeks = 53, seed = 42, total = 1247 }) {
             t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
             return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
         };
-        return Array.from({ length: weeks }, (_, w) =>
+        return Array.from({ length: weeks }, () =>
             Array.from({ length: 7 }, (_, d) => {
                 const weekend = d === 0 || d === 6;
                 const r = rand();
@@ -242,6 +244,7 @@ export function SocialIcon({ icon, className = "h-[18px] w-[18px]" }) {
 }
 
 /* Scroll-spy — returns the id of the section currently in view */
+// eslint-disable-next-line react-refresh/only-export-components
 export function useActiveSection(ids) {
     const [active, setActive] = useState(ids[0]);
     useEffect(() => {

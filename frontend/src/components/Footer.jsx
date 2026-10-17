@@ -12,7 +12,7 @@ export default function Footer() {
                 <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
                     <div>
                         <div className="flex items-center gap-2.5">
-                            <img src="/logo.svg" alt="" className="h-8 w-8 rounded-lg" width="32" height="32" />
+                            <img src="/logo.svg" alt="Mirjaj Ajij Milon Logo" className="h-8 w-8 rounded-lg" width="32" height="32" />
                             <span className="font-display text-lg font-bold">
                                 {site.logoWord.split(".")[0]}
                                 <span className="text-accent">.dev</span>

@@ -8,9 +8,9 @@ export const site = {
     firstName: "Mirjaj",
     initials: "MAM",
     logoWord: "mirjaj.dev",
-    role: "Software Engineering & Backend Developer",
+    role: "Software Engineer & Backend Developer",
     typingWords: [
-        "Software Engineering & Backend Developer",
+        "Software Engineer & Backend Developer",
         "Backend Developer",
         "1st Place Winner @ DIGONTOM Hackathon",
         "REST API & Backend Architect",
@@ -43,12 +43,12 @@ export const site = {
         { value: 1, suffix: "st", label: "Hackathon Winner" },
     ],
 
-    // Contact form (Web3Forms)
-    web3formsKey: "",
+    // Contact form (Web3Forms access key, configurable via VITE_WEB3FORMS_KEY env var)
+    web3formsKey: import.meta.env?.VITE_WEB3FORMS_KEY || "",
 
     // Footer
     footerCredit: "Built with React & Tailwind CSS",
-    sourceUrl: "https://github.com/mirjaj-milon/portfolio",
+    sourceUrl: "https://github.com/mirjaj-ajij-milon/mirjaj-ajij-milon-portfolio",
     copyrightYear: 2026,
 };
 

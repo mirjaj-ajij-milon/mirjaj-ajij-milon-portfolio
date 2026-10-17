@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown, Download } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { site } from "@/data/site";
@@ -25,7 +25,7 @@ export default function Hero() {
                     <div className="relative mx-auto h-32 w-32 sm:h-40 sm:w-40 md:h-44 md:w-44 overflow-hidden rounded-full border-2 border-border bg-surface ring-2 ring-accent/20 transition-transform duration-300 hover:scale-[1.02]">
                         <img
                             src={site.avatar}
-                            alt=""
+                            alt={`Portrait of ${site.name}`}
                             width="176"
                             height="176"
                             fetchpriority="high"

@@ -51,6 +51,6 @@ export const experience = [
             "Configured monorepo continuous deployment pipelines spanning Vercel serverless backends, Render API hosts, and Netlify frontends.",
         ],
         tech: ["React.js", "Node.js", "Express.js", "MongoDB", "WebRTC", "Socket.io", "Stripe"],
-        link: { label: "GitHub Portfolio", url: "https://github.com/mirjaj-milon" },
+        link: { label: "GitHub Portfolio", url: "https://github.com/mirjaj-ajij-milon" },
     },
 ];

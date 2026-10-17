@@ -22,7 +22,7 @@ export default function Achievements() {
                                 {a.logo ? (
                                     <img
                                         src={a.logo}
-                                        alt=""
+                                        alt={`${a.title} logo`}
                                         className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-xl border border-border bg-surface p-1 object-contain shadow-xs"
                                     />
                                 ) : (

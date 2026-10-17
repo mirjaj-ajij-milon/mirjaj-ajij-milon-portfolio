@@ -6,8 +6,8 @@ export const socials = [
     {
         name: "GitHub",
         icon: "github",
-        url: "https://github.com/mirjaj-milon",
-        label: "GitHub — @mirjaj-milon",
+        url: "https://github.com/mirjaj-ajij-milon",
+        label: "GitHub — @mirjaj-ajij-milon",
     },
     {
         name: "LinkedIn",
@@ -18,8 +18,8 @@ export const socials = [
     {
         name: "LeetCode",
         icon: "leetcode",
-        url: "https://leetcode.com/u/mirjajajijmilon",
-        label: "LeetCode — @mirjajajijmilon",
+        url: "https://leetcode.com/u/mirjaj/",
+        label: "LeetCode — @mirjaj",
     },
     {
         name: "GeeksforGeeks",
@@ -43,6 +43,6 @@ export const socials = [
 
 // Coding platforms highlighted in the About DSA card
 export const codingProfiles = [
-    { name: "LeetCode", url: "https://leetcode.com/u/mirjajajijmilon" },
+    { name: "LeetCode", url: "https://leetcode.com/u/mirjaj/" },
     { name: "GeeksforGeeks", url: "https://www.geeksforgeeks.org/user/mirjajajijmilon" },
 ];

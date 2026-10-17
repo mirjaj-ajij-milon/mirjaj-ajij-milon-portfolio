@@ -42,13 +42,13 @@ export const achievements = [
 export const codingProfiles = [
     {
         platform: "LeetCode",
-        handle: "@mirjajajijmilon",
-        url: "https://leetcode.com/u/mirjajajijmilon",
+        handle: "@mirjaj",
+        url: "https://leetcode.com/u/mirjaj/",
         icon: "leetcode",
         stats: [
             { label: "Problems", value: "LeetCode" },
             { label: "Focus", value: "DSA" },
-            { label: "Total Solved", value: "257+" },
+            { label: "Total Solved", value: "150+" },
         ],
     },
     {
@@ -59,49 +59,7 @@ export const codingProfiles = [
         stats: [
             { label: "Platform", value: "GFG" },
             { label: "Focus", value: "Algorithms" },
-            { label: "Total Solved", value: "257+" },
+            { label: "Total Solved", value: "130+" },
         ],
-    },
-];
-
-export const testimonials = [
-    {
-        quote:
-            "Mirjaj implemented clean role-based authentication and 18+ modular REST endpoints for our player and team systems. His discipline with Postman testing and error handling was impressive.",
-        name: "Engineering Lead",
-        role: "Gameonix Esports & Gaming",
-        avatar:
-            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?crop=entropy&cs=srgb&fm=jpg&q=80&w=200&auto=format&fit=crop",
-    },
-    {
-        quote:
-            "BizPilot AI stood out in DIGONTOM Hackathon 2026 for its rapid execution, seamless Groq API inference, and thoughtful rate-limiting architecture. A well-deserved 1st place victory.",
-        name: "Hackathon Evaluation Jury",
-        role: "DIGONTOM Remote Hackathon 2026",
-        avatar:
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&q=80&w=200&auto=format&fit=crop",
-    },
-];
-
-export const services = [
-    {
-        icon: "Server",
-        title: "REST API & Backend Architecture",
-        detail: "Production-ready REST APIs with JWT authentication, role-based access control (RBAC), rate limiting, and Postman validation.",
-    },
-    {
-        icon: "Globe2",
-        title: "Full-Stack Web Development",
-        detail: "Responsive React frontends connected to Node.js/Express and MongoDB backends with clean MVC structure.",
-    },
-    {
-        icon: "Cpu",
-        title: "AI Integration & Real-Time Systems",
-        detail: "Integrating fast LLM inferences (Groq API, Llama 3.3), WebRTC P2P streaming, and Socket.io event-driven signaling.",
-    },
-    {
-        icon: "CreditCard",
-        title: "Secure Payments & Cloud Deployment",
-        detail: "Stripe checkout and webhook workflows deployed to Render, Netlify, and Vercel serverless environments.",
     },
 ];

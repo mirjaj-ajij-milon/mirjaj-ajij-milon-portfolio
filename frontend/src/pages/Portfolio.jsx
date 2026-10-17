@@ -6,7 +6,6 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Achievements from "@/components/Achievements";
-import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollToTop, { HireMeFloat } from "@/components/ScrollToTop";
@@ -26,7 +25,6 @@ export default function Portfolio() {
                 <Experience />
                 <Education />
                 <Achievements />
-                <Testimonials />
                 <Contact />
             </main>
             <Footer />

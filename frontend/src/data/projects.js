@@ -24,8 +24,8 @@ export const projects = [
         tech: ["react", "nodejs", "express", "mongodb", "groq", "llama", "jwt", "tailwind"],
         links: {
             live: "https://bizpilot-ai.vercel.app",
-            github: "https://github.com/mirjaj-milon/BizPilot-AI",
-            docs: "https://github.com/mirjaj-milon/BizPilot-AI#readme",
+            github: "https://github.com/mirjaj-ajij-milon/BizPilot-AI",
+            docs: "https://github.com/mirjaj-ajij-milon/BizPilot-AI#readme",
         },
         thumbnail: "/images/project_Images/bizpilot.png",
         overview:
@@ -81,8 +81,8 @@ export const projects = [
         tech: ["react", "nodejs", "express", "mongodb", "stripe", "jwt", "tailwind"],
         links: {
             live: "https://swadzo.netlify.app",
-            github: "https://github.com/mirjaj-milon/swadzo",
-            docs: "https://github.com/mirjaj-milon/swadzo#readme",
+            github: "https://github.com/mirjaj-ajij-milon/swadzo",
+            docs: "https://github.com/mirjaj-ajij-milon/swadzo#readme",
         },
         thumbnail: "/images/project_Images/Swadzo.png",
         overview:
@@ -138,8 +138,8 @@ export const projects = [
         tech: ["react", "nodejs", "express", "mongodb", "passport", "tailwind"],
         links: {
             live: "https://tradesphere.netlify.app",
-            github: "https://github.com/mirjaj-milon/TradeSphere",
-            docs: "https://github.com/mirjaj-milon/TradeSphere#readme",
+            github: "https://github.com/mirjaj-ajij-milon/TradeSphere",
+            docs: "https://github.com/mirjaj-ajij-milon/TradeSphere#readme",
         },
         thumbnail: "/images/project_Images/tradesphere.png",
         overview:
@@ -194,9 +194,9 @@ export const projects = [
         ],
         tech: ["react", "nodejs", "express", "mongodb", "webrtc", "socket.io", "tailwind"],
         links: {
-            live: "https://github.com/mirjaj-milon/Vionex",
-            github: "https://github.com/mirjaj-milon/Vionex",
-            docs: "https://github.com/mirjaj-milon/Vionex#readme",
+            live: "https://github.com/mirjaj-ajij-milon/Vionex",
+            github: "https://github.com/mirjaj-ajij-milon/Vionex",
+            docs: "https://github.com/mirjaj-ajij-milon/Vionex#readme",
         },
         thumbnail: "/images/project_Images/Vionex.png",
         overview:
@@ -223,7 +223,7 @@ export const projects = [
             {
                 challenge: "Managing track replacement without disconnecting peer sessions during camera toggle.",
                 solution:
-                    "Used RTCRtpSender.replaceTrack for seamless audio/video mute toggles without renegotiation renegotiation overhead.",
+                    "Used RTCRtpSender.replaceTrack for seamless audio/video mute toggles without renegotiation overhead.",
             },
         ],
         learnings:
@@ -251,8 +251,8 @@ export const projects = [
         tech: ["nodejs", "express", "mongodb", "passport", "cloudinary", "leaflet", "bootstrap"],
         links: {
             live: "https://wonderlust-marketplace.onrender.com",
-            github: "https://github.com/mirjaj-milon/wonderlust",
-            docs: "https://github.com/mirjaj-milon/wonderlust#readme",
+            github: "https://github.com/mirjaj-ajij-milon/wonderlust",
+            docs: "https://github.com/mirjaj-ajij-milon/wonderlust#readme",
         },
         thumbnail: "/images/project_Images/Wonderlust.png",
         overview:
