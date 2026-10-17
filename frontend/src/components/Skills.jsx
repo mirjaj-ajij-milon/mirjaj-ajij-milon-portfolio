@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Lightbulb, MessageSquare, Users } from "lucide-react";
+import { Lightbulb, MessageSquare, Sparkles, Users } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { currentlyLearning, roadmap, skillGroups, softSkills, tierMeta } from "@/data/skills";
 import { Chip, Reveal, SectionHeading, TechIcon, TierDot, lucideIcon } from "@/components/shared";

@@ -31,6 +31,7 @@ export default [
         'warn',
         { argsIgnorePattern: '^_|^[A-Z]', varsIgnorePattern: '^[A-Z]|^motion$' },
       ],
+      'no-undef': 'error',
     },
   },
 ]
