@@ -1,29 +1,25 @@
-// =====================================================================
-// SITE CONFIG — Mirjaj Ajij Milon Developer Portfolio
-// =====================================================================
-
 export const site = {
     // Identity
     name: "Mirjaj Ajij Milon",
     firstName: "Mirjaj",
     initials: "MAM",
     logoWord: "mirjaj.dev",
-    role: "Software Engineer & Backend Developer",
+    role: "MERN Stack Developer & Backend Engineer",
     typingWords: [
-        "Software Engineer & Backend Developer",
-        "Backend Developer",
-        "1st Place Winner @ DIGONTOM Hackathon",
+        "1st Place Winner @ DIGONTOM Hackathon 2026",
+        "MERN Stack Developer",
+        "Backend Engineer",
         "REST API & Backend Architect",
         "Full-Stack Application Developer",
-        "Problem Solver (257+ DSA Solved)",
+        "Problem Solver (280+ DSA Solved)",
     ],
-    pitch: "Software Engineer & Backend Developer with 1st place at DIGONTOM Remote Hackathon 2026 and production REST API experience at Gameonix Esports. Shipped 5 full-stack applications.",
+    pitch: "MERN Stack Developer and Hackathon Winner with production REST API experience at Gameonix Esports. Won 1st place at DIGONTOM Remote Hackathon 2026. Shipped 5 full-stack applications spanning AI, fintech, e-commerce, and real-time communication.",
 
     // Contact
     email: "mirjajajijmilon@gmail.com",
     phone: "+91 85098 57590",
-    location: "Kolkata, India",
-    availability: "Open to software development internship opportunities",
+    location: "West Bengal, India",
+    availability: "Open to full-stack and backend development internship opportunities",
     availabilityDate: "Immediate",
     replyTime: "Usually replies within 24 hours",
 
@@ -31,19 +27,19 @@ export const site = {
     resumePath: "/resume/Mirjaj_Ajij_Milon_Resume.pdf",
     resumeFileName: "Mirjaj_Ajij_Milon_Resume.pdf",
 
-    // Imagery — Selected professional headshots
+    // Imagery
     avatar: "/images/my_Image_Profesonal.jpeg",
     aboutImage: "/images/Mirjaj_Ajij_Milon.jpeg",
 
-    // Hero stat counters from resume data
+    // Hero stat counters
     stats: [
-        { value: 46, suffix: "+", label: "REST APIs Built" },
-        { value: 257, suffix: "+", label: "DSA Problems Solved" },
+        { value: 104, suffix: "+", label: "REST APIs Built" },
+        { value: 280, suffix: "+", label: "DSA Problems Solved" },
         { value: 5, suffix: "", label: "Full-Stack Apps Shipped" },
         { value: 1, suffix: "st", label: "Hackathon Winner" },
     ],
 
-    // Contact form (Web3Forms access key, configurable via VITE_WEB3FORMS_KEY env var)
+    // Contact form
     web3formsKey: import.meta.env?.VITE_WEB3FORMS_KEY || "",
 
     // Footer
@@ -53,7 +49,7 @@ export const site = {
 };
 
 export const aboutBio = [
-    "I'm Mirjaj Ajij Milon, a 3rd-year Computer Science and Engineering undergraduate at Brainware University (2024–2028) with a passion for software engineering, resilient backend systems, and clean RESTful architectures.",
-    "I won 1st Place at the DIGONTOM Remote Hackathon 2026 with BizPilot AI, an AI retail copilot powered by Groq and Llama 3.3. Previously, as a Backend Developer Intern at Gameonix Esports, I engineered and deployed 18+ modular REST API endpoints with RBAC and JWT authentication.",
-    "With 5 full-stack applications shipped and 257+ DSA problems solved across LeetCode and GeeksforGeeks, I'm actively seeking software development internship opportunities where I can solve complex engineering challenges and create high-impact systems.",
+    "I'm Mirjaj Ajij Milon, a MERN Stack Developer and 3rd-year Computer Science and Engineering student at Brainware University (2024–2028, CGPA: 8.57). I'm passionate about building resilient backend systems, clean RESTful architectures, and AI-powered full-stack applications.",
+    "I won 1st Place at the DIGONTOM Remote Hackathon 2026 with BizPilot AI — an AI-powered retail CRM and POS system built with React, Node.js, Groq API (Llama 3.3), and MongoDB, featuring multilingual voice assistance in English, Hindi, and Bengali. Previously, as a Backend Developer Intern at Gameonix Esports, I engineered 18+ modular REST API endpoints with JWT authentication, RBAC, and bcrypt — deployed to production on Render.",
+    "I have shipped 5 full-stack applications spanning AI-powered business tools, stock trading, food ordering with Stripe payments, real-time video conferencing with WebRTC and Socket.io, and a travel rental marketplace. I have solved 280+ DSA problems across LeetCode and GeeksforGeeks. I am actively seeking full-stack or backend development internship opportunities where I can contribute to real engineering challenges.",
 ];
