@@ -1,13 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const ThemeContext = createContext({ theme: "dark", toggle: () => { } });
+const ThemeContext = createContext({ theme: "light", toggle: () => { } });
 
 export function ThemeProvider({ children }) {
     const [theme, setTheme] = useState(() => {
         try {
-            return localStorage.getItem("theme") || "dark";
+            const saved = localStorage.getItem("theme");
+            if (saved) return saved;
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         } catch {
-            return "dark";
+            return "light";
         }
     });
 
@@ -15,6 +17,7 @@ export function ThemeProvider({ children }) {
         const root = document.documentElement;
         root.classList.remove("dark", "light");
         root.classList.add(theme);
+        root.setAttribute("data-theme", theme);
         try {
             localStorage.setItem("theme", theme);
         } catch {

@@ -10,7 +10,7 @@ export default function ThemeToggle() {
             onClick={toggle}
             data-testid="theme-toggle-btn"
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="btn-icon !rounded-full relative text-foreground"
+            className="btn-icon !rounded-full relative text-text"
         >
             <AnimatePresence mode="wait" initial={false}>
                 <motion.span

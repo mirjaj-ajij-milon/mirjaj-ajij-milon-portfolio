@@ -27,7 +27,7 @@ function TestimonialCarousel() {
             data-testid="testimonials-carousel"
         >
             <div className="card-surface relative overflow-hidden p-8 sm:p-10">
-                <Quote className="absolute right-6 top-6 h-16 w-16 text-primary/10" aria-hidden="true" />
+                <Quote className="absolute right-6 top-6 h-16 w-16 text-accent/10" aria-hidden="true" />
                 <AnimatePresence mode="wait">
                     <motion.figure
                         key={idx}
@@ -36,12 +36,12 @@ function TestimonialCarousel() {
                         exit={{ opacity: 0, y: -16 }}
                         transition={{ duration: 0.35 }}
                     >
-                        <blockquote className="text-base leading-relaxed text-foreground/90 sm:text-lg">“{t.quote}”</blockquote>
+                        <blockquote className="text-base leading-relaxed text-text sm:text-lg">“{t.quote}”</blockquote>
                         <figcaption className="mt-6 flex items-center gap-3">
                             <img src={t.avatar} alt={`Portrait of ${t.name}`} loading="lazy" width="44" height="44" className="h-11 w-11 rounded-full border border-border object-cover" />
                             <div>
-                                <p className="text-sm font-semibold">{t.name}</p>
-                                <p className="text-xs text-muted-foreground">{t.role}</p>
+                                <p className="text-sm font-semibold text-text">{t.name}</p>
+                                <p className="text-xs text-text-muted">{t.role}</p>
                             </div>
                         </figcaption>
                     </motion.figure>
@@ -59,7 +59,7 @@ function TestimonialCarousel() {
                             onClick={() => setIdx(i)}
                             aria-label={`Go to testimonial ${i + 1}`}
                             data-testid={`testimonial-dot-${i}`}
-                            className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40"}`}
+                            className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-accent" : "w-1.5 bg-control-border hover:bg-text-muted"}`}
                         />
                     ))}
                 </div>
@@ -85,12 +85,12 @@ export default function Testimonials() {
                     const Icon = SERVICE_ICONS[s.icon] || Server;
                     return (
                         <Reveal key={s.title} delay={i * 0.05}>
-                            <div data-testid={`service-card-${i}`} className="card-surface group h-full p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-md">
-                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                            <div data-testid={`service-card-${i}`} className="card-surface group h-full p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-control-border">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-badge-bg text-accent transition-colors group-hover:bg-accent group-hover:text-on-accent">
                                     <Icon className="h-5 w-5" aria-hidden="true" />
                                 </span>
-                                <h3 className="mt-4 font-display text-base font-semibold">{s.title}</h3>
-                                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.detail}</p>
+                                <h3 className="mt-4 font-display text-base font-semibold text-text">{s.title}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-text-muted">{s.detail}</p>
                             </div>
                         </Reveal>
                     );

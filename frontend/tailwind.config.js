@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -13,6 +13,25 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
+        // Direct baseline semantic tokens
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        text: {
+          DEFAULT: 'var(--text)',
+          muted: 'var(--text-muted)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent)',
+          hover: 'var(--hover)',
+          active: 'var(--active)',
+        },
+        'on-accent': 'var(--on-accent)',
+        'control-border': 'var(--control-border)',
+        'badge-bg': 'var(--badge-bg)',
+        'badge-text': 'var(--badge-text)',
+        focus: 'var(--focus)',
+
+        // Standard layout tokens mapped via CSS custom properties
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -34,10 +53,6 @@ export default {
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',

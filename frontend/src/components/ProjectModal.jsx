@@ -4,16 +4,16 @@ import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, CircleDot, ExternalLin
 import { External, TechIcon } from "@/components/shared";
 
 const STATUS_CLS = {
-    Live: "border-emerald-400/30 bg-emerald-400/10 text-emerald-500 dark:text-emerald-300",
-    "In Progress": "border-amber-400/30 bg-amber-400/10 text-amber-500 dark:text-amber-300",
-    "Open Source": "border-sky-400/30 bg-sky-400/10 text-sky-500 dark:text-sky-300",
+    Live: "border-border bg-badge-bg text-badge-text",
+    "In Progress": "border-border bg-badge-bg text-badge-text",
+    "Open Source": "border-border bg-badge-bg text-badge-text",
 };
 
 function Carousel({ screenshots, title }) {
     const [idx, setIdx] = useState(0);
     const go = (d) => setIdx((i) => (i + d + screenshots.length) % screenshots.length);
     return (
-        <div data-testid="project-screenshot-carousel" className="overflow-hidden rounded-2xl border border-border">
+        <div data-testid="project-screenshot-carousel" className="overflow-hidden rounded-xl border border-border bg-bg">
             <div className="relative">
                 <AnimatePresence mode="wait">
                     <motion.img
@@ -30,15 +30,15 @@ function Carousel({ screenshots, title }) {
                 </AnimatePresence>
                 {screenshots.length > 1 && (
                     <>
-                        <button type="button" onClick={() => go(-1)} data-testid="carousel-prev" aria-label="Previous screenshot" className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70">
+                        <button type="button" onClick={() => go(-1)} data-testid="carousel-prev" aria-label="Previous screenshot" className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-text border border-border transition-colors hover:bg-surface">
                             <ChevronLeft className="h-4 w-4" />
                         </button>
-                        <button type="button" onClick={() => go(1)} data-testid="carousel-next" aria-label="Next screenshot" className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70">
+                        <button type="button" onClick={() => go(1)} data-testid="carousel-next" aria-label="Next screenshot" className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-text border border-border transition-colors hover:bg-surface">
                             <ChevronRight className="h-4 w-4" />
                         </button>
                         <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
                             {screenshots.map((_, i) => (
-                                <span key={i} className={`h-1.5 w-1.5 rounded-full transition-colors ${i === idx ? "bg-white" : "bg-white/40"}`} />
+                                <span key={i} className={`h-1.5 w-1.5 rounded-full transition-colors ${i === idx ? "bg-accent" : "bg-border"}`} />
                             ))}
                         </div>
                     </>
@@ -51,8 +51,8 @@ function Carousel({ screenshots, title }) {
 function Block({ icon: Icon, title, children, testid }) {
     return (
         <section data-testid={testid}>
-            <h3 className="mb-3 flex items-center gap-2 font-display text-base font-semibold">
-                <Icon className="h-4 w-4 text-primary" aria-hidden="true" />
+            <h3 className="mb-3 flex items-center gap-2 font-display text-base font-semibold text-text">
+                <Icon className="h-4 w-4 text-accent" aria-hidden="true" />
                 {title}
             </h3>
             {children}
@@ -81,13 +81,13 @@ export default function ProjectModal({ project, onClose }) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                 >
-                    <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
                     <motion.div
                         data-testid="project-modal"
                         role="dialog"
                         aria-modal="true"
                         aria-label={`${project.title} details`}
-                        className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-t-3xl border bg-card shadow-2xl sm:rounded-3xl"
+                        className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-t-2xl border border-border bg-surface shadow-2xl sm:rounded-2xl"
                         initial={{ y: 60, opacity: 0, scale: 0.98 }}
                         animate={{ y: 0, opacity: 1, scale: 1 }}
                         exit={{ y: 60, opacity: 0, scale: 0.98 }}
@@ -95,20 +95,20 @@ export default function ProjectModal({ project, onClose }) {
                     >
                         <div className="relative h-44 sm:h-64 md:h-72">
                             <img src={project.thumbnail} alt={`${project.title} cover`} className="h-full w-full object-cover object-top" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" aria-hidden="true" />
-                            <button type="button" onClick={onClose} data-testid="project-modal-close" aria-label="Close project details" className="absolute right-3 top-3 sm:right-4 sm:top-4 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-colors hover:bg-black/70">
+                            <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" aria-hidden="true" />
+                            <button type="button" onClick={onClose} data-testid="project-modal-close" aria-label="Close project details" className="absolute right-3 top-3 sm:right-4 sm:top-4 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-surface/90 text-text border border-border transition-colors hover:bg-surface">
                                 <X className="h-5 w-5" />
                             </button>
                             <div className="absolute bottom-3 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6">
-                                <span className={`mb-1.5 sm:mb-2 inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium backdrop-blur-md ${STATUS_CLS[project.status]}`}>
+                                <span className={`mb-1.5 sm:mb-2 inline-block rounded-md border px-2.5 py-0.5 text-xs font-mono font-medium backdrop-blur-md ${STATUS_CLS[project.status]}`}>
                                     {project.status}
                                 </span>
-                                <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">{project.title}</h2>
+                                <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-text">{project.title}</h2>
                             </div>
                         </div>
 
                         <div className="space-y-6 sm:space-y-8 p-4 sm:p-8">
-                            <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">{project.overview}</p>
+                            <p className="text-sm sm:text-base leading-relaxed text-text-muted">{project.overview}</p>
 
                             <div className="flex flex-wrap gap-2.5">
                                 {project.links.live && (
@@ -134,9 +134,9 @@ export default function ProjectModal({ project, onClose }) {
                             <Block icon={CircleDot} title="Architecture" testid="modal-architecture">
                                 <div className="space-y-2">
                                     {project.architecture.map((layer, i) => (
-                                        <div key={layer} className="flex items-center gap-3 rounded-xl border border-border bg-secondary/40 px-4 py-2.5">
-                                            <span className="font-mono text-xs font-medium text-primary">{String(i + 1).padStart(2, "0")}</span>
-                                            <span className="text-sm">{layer}</span>
+                                        <div key={layer} className="flex items-center gap-3 rounded-lg border border-border bg-bg px-4 py-2.5">
+                                            <span className="font-mono text-xs font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>
+                                            <span className="text-sm text-text font-medium">{layer}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -145,8 +145,8 @@ export default function ProjectModal({ project, onClose }) {
                             <Block icon={Wrench} title="Key Features" testid="modal-features">
                                 <ul className="grid gap-2 sm:grid-cols-2">
                                     {project.features.map((f) => (
-                                        <li key={f} className="flex items-start gap-2 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-sm">
-                                            <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+                                        <li key={f} className="flex items-start gap-2 rounded-lg border border-border bg-bg px-4 py-3 text-sm text-text">
+                                            <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
                                             {f}
                                         </li>
                                     ))}
@@ -156,13 +156,13 @@ export default function ProjectModal({ project, onClose }) {
                             <Block icon={Lightbulb} title="Challenges & How I Solved Them" testid="modal-challenges">
                                 <div className="space-y-3">
                                     {project.challenges.map((c) => (
-                                        <div key={c.challenge} className="rounded-xl border border-border p-4">
-                                            <p className="text-sm font-medium">
-                                                <span className="mr-2 rounded-md border border-rose-400/30 bg-rose-400/10 px-1.5 py-0.5 font-mono text-xs uppercase text-rose-400">challenge</span>
+                                        <div key={c.challenge} className="rounded-xl border border-border p-4 bg-surface">
+                                            <p className="text-sm font-medium text-text">
+                                                <span className="mr-2 rounded border border-control-border bg-bg px-2 py-0.5 font-mono text-[10px] uppercase text-text font-semibold">challenge</span>
                                                 {c.challenge}
                                             </p>
-                                            <p className="mt-2 text-sm text-muted-foreground">
-                                                <span className="mr-2 rounded-md border border-emerald-400/30 bg-emerald-400/10 px-1.5 py-0.5 font-mono text-xs uppercase text-emerald-400">fix</span>
+                                            <p className="mt-2 text-sm text-text-muted">
+                                                <span className="mr-2 rounded border border-border bg-badge-bg px-2 py-0.5 font-mono text-[10px] uppercase text-badge-text font-semibold">fix</span>
                                                 {c.solution}
                                             </p>
                                         </div>
@@ -173,7 +173,7 @@ export default function ProjectModal({ project, onClose }) {
                             {project.screenshots.length > 0 && <Carousel screenshots={project.screenshots} title={project.title} />}
 
                             <Block icon={BookOpen} title="What I Learned" testid="modal-learnings">
-                                <blockquote className="rounded-xl border-l-4 border-primary bg-secondary/40 px-5 py-4 text-sm italic leading-relaxed text-muted-foreground">
+                                <blockquote className="rounded-xl border-l-4 border-accent bg-bg px-5 py-4 text-sm italic leading-relaxed text-text-muted">
                                     {project.learnings}
                                 </blockquote>
                             </Block>
@@ -181,16 +181,16 @@ export default function ProjectModal({ project, onClose }) {
                             <Block icon={Rocket} title="Future Improvements" testid="modal-future">
                                 <ul className="flex flex-wrap gap-2">
                                     {project.future.map((f) => (
-                                        <li key={f} className="rounded-full border border-dashed border-border px-3 py-1 text-xs text-muted-foreground">{f}</li>
+                                        <li key={f} className="rounded-full border border-border bg-bg px-3 py-1 font-mono text-xs text-text-muted">{f}</li>
                                     ))}
                                 </ul>
                             </Block>
 
                             <footer className="flex flex-col gap-3 border-t border-border pt-6">
-                                <p className="font-mono text-xs text-muted-foreground">{project.role}</p>
+                                <p className="font-mono text-xs text-text-muted">{project.role}</p>
                                 <div className="flex flex-wrap gap-1.5">
                                     {project.tech.map((t) => (
-                                        <span key={t} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs text-secondary-foreground">
+                                        <span key={t} className="badge-tech">
                                             <TechIcon devicon={t === "socket.io" ? "socketdotio" : t === "swagger" ? "swagger" : t} invertDark={t === "express" || t === "nextdotjs" || t === "vercel" || t === "swagger"} className="h-3 w-3" />
                                             {t}
                                         </span>

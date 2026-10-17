@@ -102,7 +102,7 @@ export const softSkills = [
 ];
 
 export const tierMeta = {
-    proficient: { label: "Proficient", dot: "bg-emerald-400" },
-    comfortable: { label: "Comfortable", dot: "bg-amber-400" },
-    learning: { label: "Learning", dot: "bg-sky-400" },
+    proficient: { label: "Proficient", dot: "bg-accent" },
+    comfortable: { label: "Comfortable", dot: "border-2 border-accent bg-transparent" },
+    learning: { label: "Learning", dot: "border-2 border-control-border bg-transparent" },
 };

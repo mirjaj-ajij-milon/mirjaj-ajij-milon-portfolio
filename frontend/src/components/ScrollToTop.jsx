@@ -23,7 +23,7 @@ export default function ScrollToTop() {
                     onClick={() => (window.__lenis ? window.__lenis.scrollTo(0, { duration: 1.2 }) : window.scrollTo({ top: 0, behavior: "smooth" }))}
                     data-testid="scroll-to-top-btn"
                     aria-label="Back to top"
-                    className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/90 shadow-md text-foreground transition-all hover:scale-105 hover:bg-accent"
+                    className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-control-border bg-surface shadow-sm text-text transition-all hover:scale-105 hover:border-accent hover:text-accent"
                 >
                     <ArrowUp className="h-4 w-4" aria-hidden="true" />
                 </motion.button>

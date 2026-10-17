@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0B0F19" />
+  <meta name="theme-color" content="#F6F8FA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)" />
   <title>Mirjaj Ajij Milon — Software Engineering & Backend Developer</title>
   <meta name="description"
     content="Portfolio of Mirjaj Ajij Milon, B.Tech CSE student at Brainware University and Backend Developer. 1st Place Winner at DIGONTOM Remote Hackathon 2026, 46+ REST APIs built, 257+ DSA problems solved." />
@@ -31,14 +32,17 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
-  <!-- Apply saved theme before first paint (dark is the default) -->
+  <!-- Apply saved theme before first paint (light is the default, respects system preference) -->
   <script>
     try {
-      var t = localStorage.getItem("theme") || "dark";
+      var saved = localStorage.getItem("theme");
+      var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       document.documentElement.classList.remove("dark", "light");
-      document.documentElement.classList.add(t);
+      document.documentElement.classList.add(theme);
+      document.documentElement.setAttribute("data-theme", theme);
     } catch (e) {
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add("light");
+      document.documentElement.setAttribute("data-theme", "light");
     }
   </script>
 

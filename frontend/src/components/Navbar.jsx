@@ -35,7 +35,7 @@ export default function Navbar() {
     return (
         <header
             data-testid="navbar"
-            className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-border bg-background/85 backdrop-blur-md shadow-sm" : "bg-transparent"
+            className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-border bg-bg/90 backdrop-blur-md shadow-xs" : "bg-transparent"
                 }`}
         >
             <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -47,9 +47,9 @@ export default function Navbar() {
                     aria-label="Back to top"
                 >
                     <img src="/logo.svg" alt={`${site.name} logo`} className="h-8 w-8 rounded-lg" width="32" height="32" />
-                    <span className="font-display text-lg font-bold tracking-tight">
+                    <span className="font-display text-lg font-bold tracking-tight text-text">
                         {site.logoWord.split(".")[0]}
-                        <span className="text-primary">.dev</span>
+                        <span className="text-accent">.dev</span>
                     </span>
                 </button>
 
@@ -61,14 +61,14 @@ export default function Navbar() {
                                 onClick={() => go(l.id)}
                                 data-testid={`nav-link-${l.id}`}
                                 aria-current={active === l.id ? "true" : undefined}
-                                className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                                className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${active === l.id ? "text-text font-semibold" : "text-text-muted hover:text-text"
                                     }`}
                             >
                                 {l.label}
                                 {active === l.id && (
                                     <motion.span
                                         layoutId="nav-underline"
-                                        className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-primary"
+                                        className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-accent"
                                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}
@@ -113,7 +113,7 @@ export default function Navbar() {
                         />
                         <motion.aside
                             data-testid="mobile-drawer"
-                            className="fixed right-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-72 flex-col gap-1 border-l border-border bg-background p-6 shadow-xl lg:hidden"
+                            className="fixed right-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-72 flex-col gap-1 border-l border-border bg-surface p-6 shadow-xl lg:hidden"
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
@@ -125,7 +125,7 @@ export default function Navbar() {
                                     type="button"
                                     onClick={() => go(l.id)}
                                     data-testid={`mobile-link-${l.id}`}
-                                    className={`rounded-xl px-4 py-3 text-left text-base transition-colors ${active === l.id ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:bg-accent/60"
+                                    className={`rounded-xl px-4 py-3 text-left text-base transition-colors ${active === l.id ? "bg-badge-bg text-badge-text font-medium" : "text-text-muted hover:bg-bg"
                                         }`}
                                 >
                                     {l.label}

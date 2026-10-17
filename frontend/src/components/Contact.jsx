@@ -76,7 +76,8 @@ export default function Contact() {
     };
 
     const field = (name, errorsObj) =>
-        `w-full rounded-xl border bg-background/60 px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-primary ${errorsObj[name] ? "border-rose-400" : "border-border"
+        `w-full rounded-xl border bg-bg px-4 py-3 text-sm outline-none transition-colors placeholder:text-text-muted focus:border-accent focus:ring-2 focus:ring-focus text-text ${
+            errorsObj[name] ? "border-rose-500" : "border-control-border"
         }`;
 
     return (
@@ -91,8 +92,8 @@ export default function Contact() {
                 <Reveal>
                     <div className="flex h-full flex-col justify-between gap-6 sm:gap-8">
                         <div className="space-y-4 sm:space-y-5">
-                            <p className="max-w-md text-sm sm:text-lg leading-relaxed text-muted-foreground">
-                                Open to <span className="font-medium text-foreground">internships, full-time roles and freelance work</span>. If you need
+                            <p className="max-w-md text-sm sm:text-lg leading-relaxed text-text-muted">
+                                Open to <span className="font-medium text-text">internships, full-time roles and freelance work</span>. If you need
                                 APIs that hold up under load and docs people actually read, let&apos;s talk.
                             </p>
 
@@ -100,32 +101,32 @@ export default function Contact() {
                                 type="button"
                                 onClick={copyEmail}
                                 data-testid="copy-email-btn"
-                                className="group flex items-center gap-3 rounded-2xl border border-border bg-card/60 p-3.5 sm:p-4 text-left transition-colors hover:border-foreground/20 w-full"
+                                className="group flex items-center gap-3 rounded-2xl border border-border bg-surface p-3.5 sm:p-4 text-left transition-colors hover:border-control-border w-full"
                                 aria-label={`Copy email address ${site.email}`}
                             >
-                                <span className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-primary/10 text-primary shrink-0">
+                                <span className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-badge-bg text-accent shrink-0">
                                     <Mail className="h-4 w-4" aria-hidden="true" />
                                 </span>
                                 <span className="flex-1 min-w-0">
-                                    <span className="block text-[11px] sm:text-xs text-muted-foreground">Email me at</span>
-                                    <span className="block font-mono text-xs sm:text-sm truncate sm:overflow-visible">{site.email}</span>
+                                    <span className="block text-[11px] sm:text-xs text-text-muted">Email me at</span>
+                                    <span className="block font-mono text-xs sm:text-sm text-text truncate sm:overflow-visible">{site.email}</span>
                                 </span>
-                                <Copy className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary shrink-0" aria-hidden="true" />
+                                <Copy className="h-4 w-4 text-text-muted transition-colors group-hover:text-accent shrink-0" aria-hidden="true" />
                             </button>
 
                             <div className="grid gap-3 grid-cols-1 sm:grid-cols-2">
-                                <div className="flex items-center gap-3 rounded-2xl border border-border bg-card/60 p-3.5 sm:p-4">
-                                    <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                                <div className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-3.5 sm:p-4">
+                                    <MapPin className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
                                     <div>
-                                        <p className="text-[11px] sm:text-xs text-muted-foreground">Based in</p>
-                                        <p className="text-xs sm:text-sm font-medium">{site.location}</p>
+                                        <p className="text-[11px] sm:text-xs text-text-muted">Based in</p>
+                                        <p className="text-xs sm:text-sm font-medium text-text">{site.location}</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3 rounded-2xl border border-border bg-card/60 p-3.5 sm:p-4">
-                                    <Phone className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                                <div className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-3.5 sm:p-4">
+                                    <Phone className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
                                     <div>
-                                        <p className="text-[11px] sm:text-xs text-muted-foreground">Call / WhatsApp</p>
-                                        <a href={`tel:${site.phone.replace(/\s+/g, '')}`} className="text-xs sm:text-sm font-medium hover:text-primary transition-colors">{site.phone}</a>
+                                        <p className="text-[11px] sm:text-xs text-text-muted">Call / WhatsApp</p>
+                                        <a href={`tel:${site.phone.replace(/\s+/g, '')}`} className="text-xs sm:text-sm font-medium text-text hover:text-accent transition-colors">{site.phone}</a>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +138,7 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <p className="mb-3 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-primary">// socials</p>
+                            <p className="mb-3 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accent">// socials</p>
                             <div className="flex flex-wrap gap-2 sm:gap-2.5">
                                 {socials.map((s) => (
                                     <External
@@ -145,7 +146,7 @@ export default function Contact() {
                                         href={s.url}
                                         testid={`contact-social-${s.icon}`}
                                         ariaLabel={s.label}
-                                        className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-foreground/20 hover:text-foreground"
+                                        className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-border bg-surface text-text-muted transition-all hover:-translate-y-0.5 hover:border-control-border hover:text-accent"
                                     >
                                         <SocialIcon icon={s.icon} className="h-4 w-4" />
                                     </External>
@@ -158,19 +159,19 @@ export default function Contact() {
                 <Reveal delay={0.1}>
                     <form ref={formRef} onSubmit={onSubmit} noValidate data-testid="contact-form" className="card-surface space-y-4 sm:space-y-5 p-4 sm:p-8">
                         <div>
-                            <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium">Name</label>
+                            <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-text">Name</label>
                             <input id="contact-name" name="name" type="text" autoComplete="name" placeholder="Ada Lovelace" data-testid="contact-name-input" className={field("name", errors)} />
-                            {errors.name && <p role="alert" data-testid="contact-name-error" className="mt-1.5 text-xs text-rose-400">{errors.name}</p>}
+                            {errors.name && <p role="alert" data-testid="contact-name-error" className="mt-1.5 text-xs text-rose-600 dark:text-rose-400 font-medium">{errors.name}</p>}
                         </div>
                         <div>
-                            <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium">Email</label>
+                            <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-text">Email</label>
                             <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="you@company.com" data-testid="contact-email-input" className={field("email", errors)} />
-                            {errors.email && <p role="alert" data-testid="contact-email-error" className="mt-1.5 text-xs text-rose-400">{errors.email}</p>}
+                            {errors.email && <p role="alert" data-testid="contact-email-error" className="mt-1.5 text-xs text-rose-600 dark:text-rose-400 font-medium">{errors.email}</p>}
                         </div>
                         <div>
-                            <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium">Message</label>
+                            <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-text">Message</label>
                             <textarea id="contact-message" name="message" rows={5} placeholder="Tell me about the role or project…" data-testid="contact-message-input" className={`${field("message", errors)} resize-none`} />
-                            {errors.message && <p role="alert" data-testid="contact-message-error" className="mt-1.5 text-xs text-rose-400">{errors.message}</p>}
+                            {errors.message && <p role="alert" data-testid="contact-message-error" className="mt-1.5 text-xs text-rose-600 dark:text-rose-400 font-medium">{errors.message}</p>}
                         </div>
 
                         {/* Honeypot — invisible to humans, catnip for bots */}
@@ -180,7 +181,7 @@ export default function Contact() {
                             type="submit"
                             disabled={sending}
                             data-testid="contact-form-submit-btn"
-                            className="btn-primary w-full py-3.5 disabled:cursor-not-allowed"
+                            className="btn-primary w-full py-3.5 disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                             {sending ? (
                                 <>
@@ -194,7 +195,7 @@ export default function Contact() {
                                 </>
                             )}
                         </button>
-                        <p className="text-center font-mono text-xs text-muted-foreground">no spam, no newsletters — just a reply</p>
+                        <p className="text-center font-mono text-xs text-text-muted">no spam, no newsletters — just a reply</p>
                     </form>
                 </Reveal>
             </div>

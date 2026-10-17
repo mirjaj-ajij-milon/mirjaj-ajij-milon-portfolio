@@ -20,10 +20,10 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-8 text-center">
+        <div className="flex min-h-screen items-center justify-center bg-bg p-8 text-center text-text">
           <div>
-            <p className="font-mono text-sm text-primary">something broke</p>
-            <p className="mt-2 text-muted-foreground">
+            <p className="font-mono text-sm text-accent">something broke</p>
+            <p className="mt-2 text-text-muted">
               Refresh the page — if it persists, check the console.
             </p>
           </div>

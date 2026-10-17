@@ -15,7 +15,7 @@ import { marqueeTech } from "@/data/projects";
 
 export default function Portfolio() {
     return (
-        <div data-testid="portfolio-page" className="min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground">
+        <div data-testid="portfolio-page" className="min-h-screen w-full max-w-full overflow-x-hidden bg-bg text-text">
             <Navbar />
             <main className="w-full max-w-full overflow-x-hidden">
                 <Hero />
