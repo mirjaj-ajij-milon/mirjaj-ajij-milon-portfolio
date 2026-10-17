@@ -12,16 +12,30 @@ import { Chip, External, Heatmap, Reveal, SectionHeading, TechIcon } from "@/com
 const hackathon_highlight = "/images/Hackathon_Highlight.jpeg";
 
 const QUICK_FACTS = [
-    { icon: MapPin, label: "Location", value: site.location },
-    { icon: GraduationCap, label: "Degree", value: "B.Tech CSE (2024–2028) · Brainware University." },
-    { icon: Briefcase, label: "Seeking", value: "Software Dev Internship (SDE)" },
+    { icon: MapPin, label: "Location", value: "West Bengal, India (Remote Ready)" },
+    { icon: GraduationCap, label: "Degree", value: "B.Tech CSE (2024–2028) · Brainware University · CGPA 8.57" },
+    { icon: Briefcase, label: "Seeking", value: "Full-Stack & Backend Internship" },
     { icon: Languages, label: "Languages", value: "English · Hindi · Bengali" },
 ];
 
-const DSA = { total: 257, easy: 120, medium: 115, hard: 22, streak: 90, topics: ["Arrays & Strings", "Trees & Graphs", "Dynamic Programming", "Recursion", "Searching & Sorting"], langs: "Java · JavaScript · C" };
+const DSA = {
+    total: 280,
+    easy: 149,
+    medium: 106,
+    hard: 16,
+    streak: 90,
+    topics: [
+        "Arrays & Strings",
+        "Trees & Graphs",
+        "Dynamic Programming",
+        "Recursion",
+        "Searching & Sorting",
+    ],
+    langs: "Java · JavaScript",
+};
 
 function DsaDonut() {
-    const pct = 0.8;
+    const pct = DSA.total / 350;
     const r = 40, c = 2 * Math.PI * r;
     return (
         <div className="relative h-20 w-20 shrink-0" role="img" aria-label={`${DSA.total} problems solved`}>
@@ -116,20 +130,38 @@ function ResumeModal({ open, onOpenChange }) {
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 z-[70] bg-black/70 backdrop-blur-sm" />
-                <Dialog.Content data-testid="resume-modal" className="fixed left-1/2 top-1/2 z-[70] flex h-[85vh] w-[92vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl">
+                <Dialog.Content
+                    data-testid="resume-modal"
+                    className="fixed left-1/2 top-1/2 z-[70] flex h-[85vh] w-[92vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl"
+                >
                     <div className="flex items-center justify-between border-b border-border px-5 py-3">
-                        <Dialog.Title className="font-display text-sm font-semibold text-text">{site.resumeFileName}</Dialog.Title>
+                        <Dialog.Title className="font-display text-sm font-semibold text-text">
+                            {site.resumeFileName}
+                        </Dialog.Title>
                         <div className="flex items-center gap-2">
-                            <a href={site.resumePath} download={site.resumeFileName} data-testid="resume-modal-download" className="btn-primary !px-3 !py-1.5 !text-xs !font-medium">
+                            <a
+                                href={site.resumePath}
+                                download={site.resumeFileName}
+                                data-testid="resume-modal-download"
+                                className="btn-primary !px-3 !py-1.5 !text-xs !font-medium"
+                            >
                                 <Download className="h-3.5 w-3.5" aria-hidden="true" />
                                 Download
                             </a>
-                            <Dialog.Close data-testid="resume-modal-close" aria-label="Close resume preview" className="rounded-lg p-1.5 text-text-muted hover:bg-bg hover:text-text">
+                            <Dialog.Close
+                                data-testid="resume-modal-close"
+                                aria-label="Close resume preview"
+                                className="rounded-lg p-1.5 text-text-muted hover:bg-bg hover:text-text"
+                            >
                                 <X className="h-4 w-4" />
                             </Dialog.Close>
                         </div>
                     </div>
-                    <iframe title="Resume preview" src={site.resumePath} className="h-full w-full flex-1 bg-white" />
+                    <iframe
+                        title="Resume preview"
+                        src={site.resumePath}
+                        className="h-full w-full flex-1 bg-white"
+                    />
                 </Dialog.Content>
             </Dialog.Portal>
         </Dialog.Root>
@@ -148,12 +180,13 @@ export default function About() {
 
             <div className="grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,390px)_1fr] min-w-0 max-w-full">
                 <div className="min-w-0 max-w-full space-y-4 sm:space-y-5">
-                    {/* Compact, beautifully framed Hackathon Highlight Card */}
+
+                    {/* Hackathon Highlight Card */}
                     <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-xs min-w-0 max-w-full">
                         <div className="relative h-60 sm:h-64 md:h-72 w-full overflow-hidden bg-bg">
                             <img
                                 src={hackathon_highlight}
-                                alt="Mirjaj Ajij Milon — 1st Place Winner at DIGONTOM Remote Hackathon"
+                                alt="Mirjaj Ajij Milon — 1st Place Winner at DIGONTOM Remote Hackathon 2026"
                                 loading="lazy"
                                 width="800"
                                 height="1066"
@@ -172,7 +205,7 @@ export default function About() {
                                         Hackathon Highlight
                                     </span>
                                     <p className="truncate text-xs sm:text-sm font-semibold text-text">
-                                        1st Place @ DIGONTOM Hackathon
+                                        1st Place @ DIGONTOM Remote Hackathon 2026
                                     </p>
                                 </div>
                             </div>
@@ -186,7 +219,8 @@ export default function About() {
                             </External>
                         </div>
                     </div>
-                    {/* Compact DSA Progress Card */}
+
+                    {/* DSA Progress Card */}
                     <DsaCard />
                 </div>
 
@@ -198,11 +232,21 @@ export default function About() {
                             ))}
                         </div>
                         <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3">
-                            <a href={site.resumePath} download={site.resumeFileName} data-testid="about-resume-btn" className="btn-primary justify-center text-xs sm:text-sm py-2.5 sm:py-2">
+                            <a
+                                href={site.resumePath}
+                                download={site.resumeFileName}
+                                data-testid="about-resume-btn"
+                                className="btn-primary justify-center text-xs sm:text-sm py-2.5 sm:py-2"
+                            >
                                 <Download className="h-4 w-4" aria-hidden="true" />
                                 Download Resume
                             </a>
-                            <button type="button" onClick={() => setPreviewOpen(true)} data-testid="about-resume-preview-btn" className="btn-secondary justify-center text-xs sm:text-sm py-2.5 sm:py-2">
+                            <button
+                                type="button"
+                                onClick={() => setPreviewOpen(true)}
+                                data-testid="about-resume-preview-btn"
+                                className="btn-secondary justify-center text-xs sm:text-sm py-2.5 sm:py-2"
+                            >
                                 <Eye className="h-4 w-4" aria-hidden="true" />
                                 Preview Resume
                             </button>
@@ -226,7 +270,9 @@ export default function About() {
                     </Reveal>
 
                     <Reveal delay={0.2}>
-                        <h3 className="mt-8 sm:mt-10 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accent">core stack</h3>
+                        <h3 className="mt-8 sm:mt-10 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                            core stack
+                        </h3>
                         <div className="mt-3.5 sm:mt-4 flex flex-wrap gap-2 sm:gap-2.5" data-testid="core-stack">
                             {marqueeTech.map((t, idx) => (
                                 <motion.div
@@ -254,7 +300,7 @@ export default function About() {
                             </h3>
                             <p className="mb-4 flex items-center gap-2 text-[11px] sm:text-xs text-text-muted">
                                 <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                                Committing almost every day since Jan 2024 — mostly backend work and the DSA grind.
+                                Committing consistently since 2024 — backend APIs, AI integrations, and daily DSA practice.
                             </p>
                             <div className="overflow-x-auto pb-2">
                                 <Heatmap />
