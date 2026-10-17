@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Clean, high-contrast light theme */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 234 89% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 95%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 28% 93%;
+    --muted-foreground: 215 16% 44%;
+    --accent: 214 32% 91%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: 234 89% 64%;
+    --radius: 0.875rem;
+  }
+
+  .dark {
+    /* Focused, calm dark theme */
+    --background: 224 44% 6%;
+    --foreground: 213 27% 93%;
+    --card: 224 35% 9%;
+    --card-foreground: 213 27% 93%;
+    --popover: 224 35% 9%;
+    --popover-foreground: 213 27% 93%;
+    --primary: 234 89% 67%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 28% 14%;
+    --secondary-foreground: 213 27% 93%;
+    --muted: 217 28% 13%;
+    --muted-foreground: 215 16% 62%;
+    --accent: 217 28% 15%;
+    --accent-foreground: 213 27% 93%;
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 25% 18%;
+    --input: 217 25% 18%;
+    --ring: 234 89% 67%;
+    --radius: 0.875rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 9999px;
+    border: 2px solid hsl(var(--background));
+  }
+}
+
+/* ============================================================
+   CORE INTERACTIVE COMPONENTS
+   ============================================================ */
+@layer components {
+  .card-surface {
+    @apply rounded-2xl border bg-card transition-colors;
+    border-color: hsl(var(--border));
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 hover:bg-primary/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card/80 px-5 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-150 hover:bg-accent hover:border-foreground/20 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-[0.98];
+  }
+
+  .btn-icon {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-all duration-150 hover:border-foreground/20 hover:bg-accent hover:text-foreground active:scale-[0.96];
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@layer utilities {
+  .text-gradient {
+    /* Fallback to clean primary accent instead of oversaturated rainbow */
+    color: hsl(var(--primary));
+  }
+
+  .hero-grid {
+    background-image: linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%);
+  }
+
+  .reveal-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes marquee-slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-continuous {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform;
+  animation: marquee-slide 24s linear infinite !important;
+}
+
+.marquee-continuous:hover,
+.group:hover .marquee-continuous {
+  animation-play-state: paused !important;
+}
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-out infinite;
+}
+
+@keyframes scroll-wheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+.scroll-wheel {
+  animation: scroll-wheel 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-continuous {
+    animation: none !important;
+  }
+  .pulse-dot {
+    animation: none !important;
+  }
+  .scroll-wheel {
+    animation: none !important;
+  }
+}

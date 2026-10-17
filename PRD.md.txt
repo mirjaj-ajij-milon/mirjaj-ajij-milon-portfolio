@@ -1,0 +1,39 @@
+# PRD — Mirjaj Ajij Milon Developer Portfolio
+
+## Original problem statement
+Build a complete, production-ready, single-page developer portfolio for a student / early-career software engineer that impresses recruiters within 30 seconds. Modern, fast, clean, fully responsive, recruiter-friendly, no lorem ipsum — real placeholder content that is easy to edit. Full brief: React + Tailwind + Framer Motion, data-file driven content, all sections (Hero, About, Skills, Projects + modal, Experience, Education, Achievements, Contact, Footer), dark mode default with toggle, Web3Forms contact form, SEO/accessibility/performance extras.
+
+## User choices (from ask_human)
+- Identity: realistic placeholder — "Mirjaj Ajij Milon", B.Tech CSE 2028, Kolkata — centralized in one config file (`src/data/site.js`).
+- Direction: look professional, "like a senior engineer built this"; Awwwards-level motion polish.
+
+## Architecture
+- Frontend-only SPA in `/app/frontend` (Create React App + craco, Tailwind 3, framer-motion, lenis, radix/shadcn primitives, sonner toasts).
+- FastAPI backend in `/app/backend` untouched — the portfolio needs no backend; contact posts to Web3Forms from the browser with a mailto fallback.
+- Content lives in `src/data/`: site.js (config), socials.js, projects.js, skills.js, experience.js, education.js, achievements.js — commented for easy editing.
+- Components in `src/components/`: Navbar (scroll-spy, mobile drawer), Hero (masked line reveal, typewriter, tilt avatar, parallax, counters), About (bio, quick facts, DSA donut/bars, core stack, heatmap, resume preview modal), Skills (6 groups, tier dots, tooltips, roadmap), Projects (filter tabs, grid, modal with architecture/challenges/carousel), Experience (timeline), Education (+certs), Achievements (+coding profiles), Testimonials (+services), Contact (validated form, honeypot, copy email), Footer, ThemeToggle, ScrollToTop (+HireMeFloat), shared.jsx (Reveal, SectionHeading, TechIcon/devicon CDN, Marquee, Heatmap, StatCounter, ScrollProgress, scroll-spy hook).
+- Routing: `/` portfolio, `*` custom terminal-style 404, ErrorBoundary wraps the tree.
+- Theme: dark default, persisted in localStorage, applied pre-paint in index.html to avoid FOUC.
+- SEO: title/description, OG + Twitter cards, JSON-LD Person schema, SVG favicon (`public/logo.svg`, original mark).
+- Resume: real placeholder PDF generated at `public/resume/Aarav_Sharma_Resume.pdf` (regen: `python3 /tmp/make_resume_pdf.py`).
+
+## User personas
+- Recruiter / hiring manager: 30-second scan — hero pitch, featured metrics, DSA stats, resume download.
+- The owner (Aarav): edits only `src/data/*` + drops a resume PDF; toggles Web3Forms key.
+
+## Core requirements (static)
+Single page, dark default + toggle, scroll-spy nav, resume always downloadable, projects filterable with detail modal, honest tier-based skills, Web3Forms form with honeypot + validation + toasts, 404 page, floating Hire Me (mobile), scroll progress bar, reduced-motion support, external links `noopener noreferrer`.
+
+## Implemented (2026-10-09)
+- All 12 sections + extras above; Lenis smooth scroll; one editorial marquee; hero parallax + 3D tilt; masked line-by-line hero reveal; typing animation; count-up stats.
+- Web3Forms integration per playbook (key empty in config → mailto fallback active).
+- README with setup / content editing / resume replacement / Web3Forms / deploy steps.
+
+## Verified (2026-10-09)
+- Desktop 1440 + mobile 390 screenshots of hero, about, education, contact, footer, light mode, mobile drawer, 404.
+- Interactions: project modal open/Esc-close, filter tabs, form validation errors, submit toast (mailto fallback), copy-email toast, HireMe auto-hide over contact, heatmap, counters. Resume PDF + logo serve 200; no console errors.
+
+## Backlog
+- P0: none open.
+- P1: paste real Web3Forms access key into `src/data/site.js` to switch the form from mailto fallback to direct send; replace placeholder identity/links/stats in data files.
+- P2: real GitHub contributions API for the heatmap; og-image.png asset; blog/articles preview section; Vercel/Netlify deploy.

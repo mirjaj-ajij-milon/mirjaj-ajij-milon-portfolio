@@ -1,0 +1,214 @@
+{
+    "project_title": "Aarav Sharma - Developer Portfolio (Awwwards Grade SPA)",
+    "context": {
+        "developer": "Aarav Sharma",
+        "role": "B.Tech CSE Student (2027) / Backend-Focused Full-Stack Engineer",
+        "location": "Kolkata, India",
+        "goal": "Impress tech recruiters in 30 seconds with senior engineer craft & Awwwards Site-of-the-Day level visual polish",
+        "file_extension": "JavaScript (.js files)"
+    },
+    "design_system": {
+        "theme": {
+            "default_mode": "dark",
+            "toggle_behavior": "Remembered via localStorage with system preference fallback",
+            "dark_bg": "#0B0F19",
+            "dark_surface": "#111827",
+            "dark_card": "#1E293B",
+            "light_bg": "#F8FAFC",
+            "light_surface": "#FFFFFF",
+            "light_card": "#F1F5F9"
+        },
+        "colors": {
+            "primary": "#6366F1",
+            "primary_hover": "#4F46E5",
+            "accent_cyan": "#22D3EE",
+            "accent_emerald": "#10B981",
+            "accent_amber": "#F59E0B",
+            "slate_50": "#F8FAFC",
+            "slate_100": "#F1F5F9",
+            "slate_300": "#CBD5E1",
+            "slate_400": "#94A3B8",
+            "slate_700": "#334155",
+            "slate_800": "#1E293B",
+            "slate_900": "#0F172A",
+            "slate_950": "#020617",
+            "border_dark": "rgba(255, 255, 255, 0.08)",
+            "border_light": "rgba(0, 0, 0, 0.08)"
+        },
+        "typography": {
+            "heading_font": "Space Grotesk, sans-serif",
+            "body_font": "Inter, sans-serif",
+            "code_font": "JetBrains Mono, monospace",
+            "hierarchy": {
+                "h1": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight",
+                "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+                "h3": "text-xl sm:text-2xl font-semibold tracking-tight",
+                "h4": "text-lg sm:text-xl font-medium",
+                "body": "text-base leading-relaxed",
+                "small": "text-sm text-muted-foreground",
+                "mono_badge": "font-mono text-xs uppercase tracking-widest"
+            }
+        },
+        "spacing_and_radius": {
+            "grid_base": "8px spacing system",
+            "section_padding": "py-20 lg:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto",
+            "card_radius": "rounded-2xl (16px)",
+            "button_radius": "rounded-xl or rounded-full for pills",
+            "shadows": "shadow-xl shadow-indigo-500/5 hover:shadow-indigo-500/15 transition-all duration-300"
+        }
+    },
+    "sections_breakdown": [
+        {
+            "section_id": "navbar",
+            "name": "Navigation Bar",
+            "features": [
+                "Sticky glassmorphism header (backdrop-blur-md bg-slate-950/70 dark or bg-white/70 light) with bottom border",
+                "Scroll-spy active indicator highlighting sections on scroll",
+                "Brand Logo ('AS /' or 'Aarav.dev')",
+                "Links: About, Skills, Projects, Experience, Coding, Contact",
+                "Theme Toggle Button (Sun/Moon with smooth rotation transition)",
+                "Resume Quick View CTA button",
+                "Mobile hamburger overlay menu"
+            ]
+        },
+        {
+            "section_id": "hero",
+            "name": "Hero Section",
+            "features": [
+                "Pulsing availability badge: '🟢 Open for Backend & Full-Stack Roles (2025/2026/2027 Batch)'",
+                "Kinetic line-by-line reveal text with typing animation for roles ('Backend Specialist', 'Distributed Systems Enthusiast', 'Full-Stack Craftsman')",
+                "Stat Counters: '800+ LeetCode Solved', '3x Internship & Lead Roles', '99.2% Uptime Built', '4+ Full-Stack Apps'",
+                "Developer Avatar with subtle gradient glow (#6366F1 to #22D3EE ring)",
+                "CTA Buttons: 'Explore Featured Projects' (Primary Glow Button) and 'Get In Touch' (Secondary Outline)",
+                "Subtle floating code snippet background card / 3D tilt moment",
+                "Animated scroll down indicator arrow"
+            ]
+        },
+        {
+            "section_id": "about",
+            "name": "About Aarav",
+            "features": [
+                "Bio highlighting B.Tech CSE at Kolkata, passion for high-throughput backend APIs, microservices, and databases",
+                "Quick Facts Grid (Location: Kolkata, Education: Heritage / Sister Nivedita / Techno Main B.Tech 2027, Focus: Golang/Node/Java/Postgres)",
+                "DSA Progress Card: Interactive breakdown chart (Arrays, Graphs, Dynamic Programming, System Design)",
+                "Core Stack Pills with icon badges",
+                "GitHub Contribution Heatmap widget visual representation"
+            ]
+        },
+        {
+            "section_id": "skills",
+            "name": "Tech Stack & Skills Matrix",
+            "features": [
+                "Grouped Cards: Backend & Databases, Frontend & UI, Cloud & DevOps, Languages & CS Fundamentals",
+                "3-Tier Colored-Dot Proficiency Legend (Advanced, Intermediate, Exploring)",
+                "Tooltips showing 'Used in: Project Alpha, Backend Service B'",
+                "'Currently Learning' block (e.g. Rust, Kafka, Kubernetes Operators)",
+                "'Next on Roadmap' mini-timeline",
+                "Soft Skills with evidence (e.g., 'Lead 15+ Hackathon Teammates', 'Technical Writer')"
+            ]
+        },
+        {
+            "section_id": "projects",
+            "name": "Featured Projects Gallery",
+            "features": [
+                "Filter Tabs: All, Full-Stack, Backend, Frontend, AI/ML",
+                "Responsive Grid (3-col desktop, 2-col tablet, 1-col mobile)",
+                "Featured Star Badges & Status Tags ('Production', 'Open Source', 'In Development')",
+                "Rich Cards with image thumbnails, real metrics impact bullets (e.g., 'Reduced p99 latency by 42%', 'Handled 10k req/min')",
+                "Tech chips & quick links (GitHub, Live Demo, System Design Diagram)",
+                "ProjectModal trigger: opens detailed modal with architecture overview, challenges, learnings, carousel screenshot viewer, and roadmap"
+            ]
+        },
+        {
+            "section_id": "experience",
+            "name": "Experience & Independent Work",
+            "features": [
+                "Vertical interactive timeline",
+                "Roles: Backend Software Engineer Intern, Open Source Contributor, Lead Developer (College Club), Hackathon Winner",
+                "Key achievements with metrics and tech tags for each role"
+            ]
+        },
+        {
+            "section_id": "education",
+            "name": "Education & Certifications",
+            "features": [
+                "B.Tech CSE timeline card with GPA, coursework (OS, DBMS, Computer Networks, System Design)",
+                "Certification Cards with verified badges (AWS Certified, Meta Backend, MongoDB Developer)"
+            ]
+        },
+        {
+            "section_id": "coding_profiles",
+            "name": "Achievements & Coding Profiles",
+            "features": [
+                "Profile Cards with live-looking stats for LeetCode (Rating 1850+, Solved 800+), GeeksforGeeks, Codeforces, CodeChef, HackerRank 5⭐",
+                "Contest rating trend graph / visual badge showcase"
+            ]
+        },
+        {
+            "section_id": "testimonials_and_services",
+            "name": "Testimonials & What I Can Do For You",
+            "features": [
+                "Carousel of mentor / peer / manager recommendations",
+                "Services grid: REST/gRPC API Development, Database Optimization, Microservices Architecture, Full-Stack SaaS MVP"
+            ]
+        },
+        {
+            "section_id": "contact",
+            "name": "Contact & Let's Work Together",
+            "features": [
+                "Left Column: Personal pitch, quick copy-email button with feedback toast ('Copied to clipboard!'), social icons (GitHub, LinkedIn, X, Discord)",
+                "Right Column: Validated form with Name, Email, Subject, Message, Honeypot spam prevention field, and Sonner toast notifications on submit"
+            ]
+        },
+        {
+            "section_id": "footer",
+            "name": "Footer",
+            "features": [
+                "Copyright line, built with React & Tailwind notice",
+                "Back to top button with smooth scroll",
+                "Social links & GitHub source repository button"
+            ]
+        },
+        {
+            "section_id": "extras",
+            "name": "Interactive Extras",
+            "features": [
+                "Floating Mobile 'Hire Me' CTA button",
+                "Resume Preview Modal with PDF view/download options",
+                "Scroll Progress Bar at top of viewport",
+                "Custom 404 / Route Fallback with retro terminal tech feel",
+                "JSON-LD Schema script injected in head for SEO Person schema"
+            ]
+        }
+    ],
+    "image_urls": {
+        "avatar": "https://images.unsplash.com/photo-1758560572645-0f7fa62ab59f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwyfHx5b3VuZyUyMGluZGlhbiUyMG1hbGUlMjBzb2Z0d2FyZSUyMGVuZ2luZWVyJTIwZGV2ZWxvcGVyJTIwd29ya2luZyUyMHBvcnRyYWl0fGVufDB8fHx8MTc5MTUyOTc5Mnww&ixlib=rb-4.1.0&q=85",
+        "project_code_1": "https://images.unsplash.com/photo-1604591259403-81d6c9cf87d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkYXJrJTIwdGVjaCUyMGNvZGUlMjBzb2Z0d2FyZSUyMGFyY2hpdGVjdHVyZSUyMHdlYiUyMGFwcGxpY2F0aW9uJTIwZGFzaGJvYXJkfGVufDB8fHx8MTc5MTUyOTc5Mnww&ixlib=rb-4.1.0&q=85",
+        "project_code_2": "https://images.unsplash.com/photo-1760548425425-e42e77fa38f1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBkYXJrJTIwdGVjaCUyMGNvZGUlMjBzb2Z0d2FyZSUyMGFyY2hpdGVjdHVyZSUyMHdlYiUyMGFwcGxpY2F0aW9uJTIwZGFzaGJvYXJkfGVufDB8fHx8MTc5MTUyOTc5Mnww&ixlib=rb-4.1.0&q=85",
+        "project_code_3": "https://images.unsplash.com/photo-1791486531215-54a15bf1bc17?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHszfHxtb2Rlcm4lMjBkYXJrJTIwdGVjaCUyMGNvZGUlMjBzb2Z0d2FyZSUyMGFyY2hpdGVjdHVyZSUyMHdlYiUyMGFwcGxpY2F0aW9uJTIwZGFzaGJvYXJkfGVufDB8fHx8MTc5MTUyOTc5Mnww&ixlib=rb-4.1.0&q=85"
+    },
+    "testing_requirements": {
+        "rule": "ALL interactive and key informational elements MUST include a data-testid attribute.",
+        "examples": [
+            "data-testid=\"nav-logo\"",
+            "data-testid=\"nav-link-projects\"",
+            "data-testid=\"theme-toggle-btn\"",
+            "data-testid=\"hero-cta-projects\"",
+            "data-testid=\"hero-cta-contact\"",
+            "data-testid=\"project-filter-all\"",
+            "data-testid=\"project-card-0\"",
+            "data-testid=\"contact-form-submit-btn\"",
+            "data-testid=\"copy-email-btn\"",
+            "data-testid=\"resume-modal-trigger\""
+        ]
+    },
+    "instructions_to_main_agent": [
+        "Build a single-page React app with modular, clean components in /src/components/.",
+        "Use JavaScript (.js and .jsx) for all components.",
+        "Ensure dark mode is default with class 'dark' added on <html> or container element, persisted in localStorage.",
+        "Use lucide-react icons extensively for tech stacks, badges, and controls.",
+        "Implement Sonner toast notifications for actions like copying email and submitting contact form.",
+        "Ensure 100% responsiveness with mobile navigation and floating CTA buttons.",
+        "Add data-testid to every button, input, link, tab, modal, and key card."
+    ]
+}

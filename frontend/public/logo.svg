@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mirjaj Ajij Milon Logo">
+  <defs>
+    <linearGradient id="mmGrad" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#mmGrad)"/>
+  <!-- M lettermark style coding glyph -->
+  <path d="M16 44V20L25 33L32 23L39 33L48 20V44" stroke="#0B0F19" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
