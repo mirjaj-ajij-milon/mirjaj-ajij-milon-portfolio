@@ -28,7 +28,7 @@ export const site = {
     resumeFileName: "Mirjaj_Ajij_Milon_Resume.pdf",
 
     // Imagery
-    avatar: "/images/my_Image_Profesonal.jpeg",
+    avatar: "/images/my_Image_Professional.jpeg",
     aboutImage: "/images/Mirjaj_Ajij_Milon.jpeg",
 
     // Hero stat counters
@@ -44,7 +44,7 @@ export const site = {
 
     // Footer
     footerCredit: "Built with React & Tailwind CSS",
-    sourceUrl: "https://github.com/Mirjaj786/mirjaj-ajij-milon-portfolio",
+    sourceUrl: "https://github.com/mirjaj-ajij-milon/mirjaj-ajij-milon-portfolio",
     copyrightYear: 2026,
 };
 

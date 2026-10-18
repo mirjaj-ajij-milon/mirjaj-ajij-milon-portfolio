@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Download } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -8,6 +8,35 @@ import { External, scrollToId, SocialIcon, StatCounter } from "@/components/shar
 
 export default function Hero() {
     const sectionRef = useRef(null);
+
+    // Typewriter effect for site.typingWords
+    const [wordIdx, setWordIdx] = useState(0);
+    const [subIdx, setSubIdx] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    useEffect(() => {
+        const words = site.typingWords;
+        if (!words || words.length === 0) return;
+
+        const currentWord = words[wordIdx];
+
+        if (subIdx === currentWord.length + 1 && !isDeleting) {
+            const pause = setTimeout(() => setIsDeleting(true), 1800);
+            return () => clearTimeout(pause);
+        }
+
+        if (subIdx === 0 && isDeleting) {
+            setIsDeleting(false);
+            setWordIdx((prev) => (prev + 1) % words.length);
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            setSubIdx((prev) => prev + (isDeleting ? -1 : 1));
+        }, isDeleting ? 35 : 75);
+
+        return () => clearTimeout(timer);
+    }, [subIdx, wordIdx, isDeleting]);
 
     return (
         <section id="home" ref={sectionRef} data-testid="hero" className="relative flex min-h-screen items-center justify-center overflow-hidden">
@@ -22,7 +51,7 @@ export default function Hero() {
                     data-testid="hero-avatar-card"
                     className="relative mb-5"
                 >
-                    <div className="relative mx-auto h-32 w-32 sm:h-40 sm:w-40 md:h-44 md:w-44 overflow-hidden rounded-full border-2 border-border bg-surface ring-2 ring-accent/20 transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="relative mx-auto h-32 w-32 sm:h-40 sm:w-40 md:h-44 md:w-44 overflow-hidden rounded-full border-2 border-accent/30 bg-surface ring-4 ring-accent/10 shadow-lg shadow-accent/20 hover:ring-accent/30 transition-all duration-300">
                         <img
                             src={site.avatar}
                             alt={`Portrait of ${site.name}`}
@@ -40,11 +69,21 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                     data-testid="hero-availability-badge"
-                    className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-badge-bg px-3.5 py-1 font-mono text-xs font-medium text-badge-text"
+                    className="mb-3 inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-badge-bg px-3.5 py-1 font-mono text-xs font-medium text-badge-text"
                 >
                     <span className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
                     <span>{site.availability}</span>
                 </motion.p>
+
+                {/* Hackathon Winner Pill Badge above name */}
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.12 }}
+                    className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 font-mono text-xs font-semibold text-accent shadow-xs"
+                >
+                    <span>🏆 1st Place · DIGONTOM Remote Hackathon 2026</span>
+                </motion.div>
 
                 {/* Headline (Name written strictly ONCE) */}
                 <motion.div
@@ -56,9 +95,12 @@ export default function Hero() {
                         Hi, I&apos;m{" "}
                         <span className="text-accent">{site.name}</span>
                     </h1>
-                    <p className="mt-2 text-base sm:text-xl lg:text-2xl font-medium text-text">
-                        {site.role}
-                    </p>
+                    <div className="mt-2 min-h-[1.75rem] sm:min-h-[2.25rem] flex items-center justify-center">
+                        <p className="text-base sm:text-xl lg:text-2xl font-semibold text-text">
+                            {site.typingWords[wordIdx].substring(0, subIdx)}
+                            <span className="animate-pulse text-accent ml-0.5">|</span>
+                        </p>
+                    </div>
                 </motion.div>
 
                 {/* Developer Key Details */}

@@ -1,206 +1,566 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, CircleDot, ExternalLink, FileText, Github, Lightbulb, Rocket, Wrench, X } from "lucide-react";
-import { External, TechIcon } from "@/components/shared";
+import {
+    AlertCircle,
+    ArrowLeft,
+    ArrowRight,
+    CheckCircle2,
+    Clock,
+    Cpu,
+    ExternalLink,
+    Github,
+    Layers,
+    Lightbulb,
+    Sparkles,
+    User,
+    X,
+} from "lucide-react";
+import TechChip from "@/components/TechChip";
 
-const STATUS_CLS = {
-    Live: "border-border bg-badge-bg text-badge-text",
-    "In Progress": "border-border bg-badge-bg text-badge-text",
-    "Open Source": "border-border bg-badge-bg text-badge-text",
-};
-
-function Carousel({ screenshots, title }) {
-    const [idx, setIdx] = useState(0);
-    const go = (d) => setIdx((i) => (i + d + screenshots.length) % screenshots.length);
-    return (
-        <div data-testid="project-screenshot-carousel" className="overflow-hidden rounded-xl border border-border bg-bg">
-            <div className="relative">
-                <AnimatePresence mode="wait">
-                    <motion.img
-                        key={idx}
-                        src={screenshots[idx]}
-                        alt={`${title} screenshot ${idx + 1}`}
-                        loading="lazy"
-                        className="h-64 w-full object-cover object-top sm:h-80"
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -40 }}
-                        transition={{ duration: 0.3 }}
-                    />
-                </AnimatePresence>
-                {screenshots.length > 1 && (
-                    <>
-                        <button type="button" onClick={() => go(-1)} data-testid="carousel-prev" aria-label="Previous screenshot" className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-text border border-border transition-colors hover:bg-surface">
-                            <ChevronLeft className="h-4 w-4" />
-                        </button>
-                        <button type="button" onClick={() => go(1)} data-testid="carousel-next" aria-label="Next screenshot" className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-text border border-border transition-colors hover:bg-surface">
-                            <ChevronRight className="h-4 w-4" />
-                        </button>
-                        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
-                            {screenshots.map((_, i) => (
-                                <span key={i} className={`h-1.5 w-1.5 rounded-full transition-colors ${i === idx ? "bg-accent" : "bg-border"}`} />
-                            ))}
-                        </div>
-                    </>
-                )}
-            </div>
-        </div>
-    );
+/**
+ * High-contrast badge styling ensuring readability against any screenshot image.
+ */
+function getModalBadgeStyle(badge = "") {
+    if (badge.includes("1st Place") || badge.includes("🏆")) {
+        return "bg-black/90 text-amber-300 border-amber-400/50 shadow-md";
+    }
+    if (badge.includes("Stripe") || badge.includes("Food")) {
+        return "bg-black/90 text-purple-300 border-purple-400/50 shadow-md";
+    }
+    if (badge.includes("WebRTC") || badge.includes("Video")) {
+        return "bg-black/90 text-cyan-300 border-cyan-400/50 shadow-md";
+    }
+    if (badge.includes("MVC") || badge.includes("Marketplace")) {
+        return "bg-black/90 text-emerald-300 border-emerald-400/50 shadow-md";
+    }
+    if (badge.includes("Trading") || badge.includes("Simulator")) {
+        return "bg-black/90 text-blue-300 border-blue-400/50 shadow-md";
+    }
+    if (badge.includes("Gemini") || badge.includes("Chat")) {
+        return "bg-black/90 text-rose-300 border-rose-400/50 shadow-md";
+    }
+    return "bg-black/90 text-teal-300 border-teal-400/50 shadow-md";
 }
 
-function Block({ icon: Icon, title, children, testid }) {
-    return (
-        <section data-testid={testid}>
-            <h3 className="mb-3 flex items-center gap-2 font-display text-base font-semibold text-text">
-                <Icon className="h-4 w-4 text-accent" aria-hidden="true" />
-                {title}
-            </h3>
-            {children}
-        </section>
-    );
-}
+/**
+ * ProjectModal component
+ * - Robust 3-layer architecture:
+ *   1. Fixed Top Header (shrink-0) with close button & mobile drag handle
+ *   2. Scrollable Middle Body (flex-1 overflow-y-auto min-h-0)
+ *   3. Fixed Bottom Footer (shrink-0) ensuring Prev/Next navigation is ALWAYS visible on mobile
+ * - Full responsiveness for mobile (<640px) and desktop (>=640px)
+ */
+export default function ProjectModal({
+    project,
+    onClose,
+    allProjects = [],
+    onSelectProject,
+}) {
+    const dialogRef = useRef(null);
+    const scrollContainerRef = useRef(null);
+    const previousActiveElementRef = useRef(null);
+    const [imgError, setImgError] = useState(false);
 
-export default function ProjectModal({ project, onClose }) {
+    // Reset scroll position and image error when project switches
+    useEffect(() => {
+        setImgError(false);
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop = 0;
+        }
+    }, [project?.id]);
+
+    // Compute previous and next projects for footer navigation
+    const currentIndex = allProjects.findIndex((p) => p.id === project?.id);
+    const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+    const nextProject =
+        currentIndex >= 0 && currentIndex < allProjects.length - 1
+            ? allProjects[currentIndex + 1]
+            : null;
+
+    // Accessibility: Focus trap, Esc key listener, scroll lock, and focus restore
     useEffect(() => {
         if (!project) return undefined;
+
+        previousActiveElementRef.current = document.activeElement;
+        const originalOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
-        const onKey = (e) => e.key === "Escape" && onClose();
-        window.addEventListener("keydown", onKey);
+
+        // Initial focus into modal close button
+        const focusTimer = setTimeout(() => {
+            if (dialogRef.current) {
+                const closeBtn = dialogRef.current.querySelector(
+                    '[data-testid="project-modal-close"]'
+                );
+                if (closeBtn) closeBtn.focus();
+                else dialogRef.current.focus();
+            }
+        }, 50);
+
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") {
+                e.preventDefault();
+                onClose();
+                return;
+            }
+
+            if (e.key === "Tab" && dialogRef.current) {
+                const focusables = Array.from(
+                    dialogRef.current.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    )
+                ).filter(
+                    (el) =>
+                        !el.hasAttribute("disabled") &&
+                        el.getAttribute("aria-hidden") !== "true" &&
+                        el.offsetParent !== null
+                );
+
+                if (focusables.length === 0) return;
+
+                const firstEl = focusables[0];
+                const lastEl = focusables[focusables.length - 1];
+
+                if (e.shiftKey && document.activeElement === firstEl) {
+                    e.preventDefault();
+                    lastEl.focus();
+                } else if (!e.shiftKey && document.activeElement === lastEl) {
+                    e.preventDefault();
+                    firstEl.focus();
+                }
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
         return () => {
-            document.body.style.overflow = "";
-            window.removeEventListener("keydown", onKey);
+            clearTimeout(focusTimer);
+            document.body.style.overflow = originalOverflow;
+            window.removeEventListener("keydown", handleKeyDown);
+
+            // Restore focus
+            if (
+                previousActiveElementRef.current &&
+                typeof previousActiveElementRef.current.focus === "function"
+            ) {
+                previousActiveElementRef.current.focus();
+            }
         };
     }, [project, onClose]);
 
+    if (!project) return null;
+
+    const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     return (
         <AnimatePresence>
-            {project && (
+            <div
+                className="fixed inset-0 z-[80] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6"
+                data-testid="project-modal-backdrop"
+            >
+                {/* Backdrop Blur Overlay */}
                 <motion.div
-                    className="fixed inset-0 z-[70] flex items-end justify-center sm:items-center sm:p-6"
+                    className="fixed inset-0 bg-black/75 backdrop-blur-md"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={onClose}
+                    aria-hidden="true"
+                />
+
+                {/* Dialog / Bottom Sheet Container */}
+                <motion.div
+                    ref={dialogRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="project-modal-title"
+                    tabIndex={-1}
+                    data-testid="project-modal-dialog"
+                    initial={
+                        prefersReducedMotion
+                            ? { opacity: 0 }
+                            : { opacity: 0, y: 30, scale: 0.98 }
+                    }
+                    animate={
+                        prefersReducedMotion
+                            ? { opacity: 1 }
+                            : { opacity: 1, y: 0, scale: 1 }
+                    }
+                    exit={
+                        prefersReducedMotion
+                            ? { opacity: 0 }
+                            : { opacity: 0, y: 30, scale: 0.98 }
+                    }
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative flex flex-col w-full bg-surface text-text border border-text/10 shadow-2xl overflow-hidden focus:outline-none h-[88vh] max-h-[88vh] rounded-t-3xl sm:h-auto sm:max-h-[85vh] sm:w-[calc(100%-32px)] sm:max-w-4xl sm:rounded-2xl"
                 >
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
-                    <motion.div
-                        data-testid="project-modal"
-                        role="dialog"
-                        aria-modal="true"
-                        aria-label={`${project.title} details`}
-                        className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-t-2xl border border-border bg-surface shadow-2xl sm:rounded-2xl"
-                        initial={{ y: 60, opacity: 0, scale: 0.98 }}
-                        animate={{ y: 0, opacity: 1, scale: 1 }}
-                        exit={{ y: 60, opacity: 0, scale: 0.98 }}
-                        transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                    >
-                        <div className="relative h-44 sm:h-64 md:h-72">
-                            <img src={project.thumbnail} alt={`${project.title} cover`} className="h-full w-full object-cover object-top" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" aria-hidden="true" />
-                            <button type="button" onClick={onClose} data-testid="project-modal-close" aria-label="Close project details" className="absolute right-3 top-3 sm:right-4 sm:top-4 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-surface/90 text-text border border-border transition-colors hover:bg-surface">
-                                <X className="h-5 w-5" />
-                            </button>
-                            <div className="absolute bottom-3 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6">
-                                <span className={`mb-1.5 sm:mb-2 inline-block rounded-md border px-2.5 py-0.5 text-xs font-mono font-medium backdrop-blur-md ${STATUS_CLS[project.status]}`}>
-                                    {project.status}
+                    {/* 1. FIXED TOP HEADER BAR (shrink-0: always pinned at top) */}
+                    <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3.5 bg-surface border-b border-text/10 z-20">
+                        <div className="flex items-center gap-2 min-w-0">
+                            {/* Mobile Drag Indicator */}
+                            <div className="sm:hidden w-8 h-1 rounded-full bg-text/25 mr-1 shrink-0" />
+                            <span className="font-display font-bold text-sm sm:text-base text-text truncate max-w-[200px] sm:max-w-md">
+                                {project.shortTitle || project.title}
+                            </span>
+                            {project.links?.live && (
+                                <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shrink-0">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                    Live
                                 </span>
-                                <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-text">{project.title}</h2>
-                            </div>
+                            )}
                         </div>
 
-                        <div className="space-y-6 sm:space-y-8 p-4 sm:p-8">
-                            <p className="text-sm sm:text-base leading-relaxed text-text-muted">{project.overview}</p>
+                        {/* Top Close Button */}
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            data-testid="project-modal-close"
+                            aria-label="Close project modal"
+                            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-text/[0.06] hover:bg-text/12 text-text hover:text-accent border border-text/10 transition-colors shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-accent shrink-0 ml-2"
+                        >
+                            <X className="h-4 w-4" />
+                        </button>
+                    </div>
 
-                            <div className="flex flex-wrap gap-2.5">
-                                {project.links.live && (
-                                    <External href={project.links.live} testid="modal-link-live" className="btn-primary">
-                                        <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                                        Live Demo
-                                    </External>
-                                )}
-                                {project.links.github && (
-                                    <External href={project.links.github} testid="modal-link-github" className="btn-secondary">
-                                        <Github className="h-4 w-4" aria-hidden="true" />
-                                        GitHub
-                                    </External>
-                                )}
-                                {project.links.docs && (
-                                    <External href={project.links.docs} testid="modal-link-docs" className="btn-secondary">
-                                        <FileText className="h-4 w-4" aria-hidden="true" />
-                                        API Docs
-                                    </External>
-                                )}
+                    {/* 2. SCROLLABLE MIDDLE BODY (flex-1 overflow-y-auto min-h-0: content scrolls cleanly) */}
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex-1 overflow-y-auto min-h-0 overscroll-contain scroll-smooth"
+                    >
+                        {/* Banner Screenshot Image */}
+                        <div className="relative w-full h-44 sm:h-56 md:h-64 bg-text/[0.04] overflow-hidden border-b border-text/10">
+                            {!imgError && project.image ? (
+                                <img
+                                    src={project.image}
+                                    alt={`${project.title} screenshot`}
+                                    loading="lazy"
+                                    onError={() => setImgError(true)}
+                                    className="h-full w-full object-cover object-top"
+                                />
+                            ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-text/[0.04] to-accent/10 p-6 text-center">
+                                    <span className="font-display font-bold text-xl text-text-muted">
+                                        {project.shortTitle || project.title}
+                                    </span>
+                                </div>
+                            )}
+
+                            {/* Top Dark Scrim for 100% Badge Contrast */}
+                            <div
+                                className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/75 via-black/35 to-transparent pointer-events-none"
+                                aria-hidden="true"
+                            />
+                            {/* Bottom Fade */}
+                            <div
+                                className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-surface via-surface/40 to-transparent pointer-events-none"
+                                aria-hidden="true"
+                            />
+
+                            {/* Floating Badge on Image */}
+                            {project.badge && (
+                                <div className="absolute top-3 left-3 pointer-events-none">
+                                    <span
+                                        className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold border shadow-md backdrop-blur-md ${getModalBadgeStyle(
+                                            project.badge
+                                        )}`}
+                                    >
+                                        {project.badge}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Modal Body Content */}
+                        <div className="px-4 sm:px-8 md:px-10 py-5 sm:py-7 space-y-6">
+                            {/* Title & Summary */}
+                            <div className="space-y-2.5">
+                                <h2
+                                    id="project-modal-title"
+                                    className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-text tracking-tight leading-snug"
+                                >
+                                    {project.title}
+                                </h2>
+
+                                <p className="text-xs sm:text-sm md:text-base text-text-muted leading-relaxed">
+                                    {project.summary}
+                                </p>
+
+                                {/* Action Buttons */}
+                                <div className="pt-2 grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3">
+                                    {project.links?.live && (
+                                        <a
+                                            href={project.links.live}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full sm:w-auto min-h-[42px] sm:min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-on-accent font-semibold text-xs sm:text-sm shadow-sm hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                                        >
+                                            <ExternalLink className="h-4 w-4 shrink-0" />
+                                            <span>Open Live Application</span>
+                                        </a>
+                                    )}
+
+                                    {project.links?.repos?.map((repo) => (
+                                        <a
+                                            key={repo.url}
+                                            href={repo.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full sm:w-auto min-h-[42px] sm:min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-text/15 bg-surface text-text hover:border-accent hover:text-accent font-medium text-xs sm:text-sm transition-colors shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                                        >
+                                            <Github className="h-4 w-4 shrink-0" />
+                                            <span>
+                                                {repo.label.toLowerCase() === "github"
+                                                    ? "GitHub Repository"
+                                                    : `GitHub · ${repo.label}`}
+                                            </span>
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
 
-                            <Block icon={CircleDot} title="Architecture" testid="modal-architecture">
-                                <div className="space-y-2">
-                                    {project.architecture.map((layer, i) => (
-                                        <div key={layer} className="flex items-center gap-3 rounded-lg border border-border bg-bg px-4 py-2.5">
-                                            <span className="font-mono text-xs font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>
-                                            <span className="text-sm text-text font-medium">{layer}</span>
-                                        </div>
-                                    ))}
+                            {/* Mobile Quick Stats Strip (Upfront info for mobile users) */}
+                            <div className="lg:hidden grid grid-cols-3 gap-2 p-3 rounded-xl bg-text/[0.03] border border-text/10 text-center">
+                                <div>
+                                    <span className="block text-[10px] font-mono uppercase tracking-wider text-text-muted">
+                                        Role
+                                    </span>
+                                    <span className="text-xs font-semibold text-text truncate block mt-0.5">
+                                        {project.role}
+                                    </span>
                                 </div>
-                            </Block>
-
-                            <Block icon={Wrench} title="Key Features" testid="modal-features">
-                                <ul className="grid gap-2 sm:grid-cols-2">
-                                    {project.features.map((f) => (
-                                        <li key={f} className="flex items-start gap-2 rounded-lg border border-border bg-bg px-4 py-3 text-sm text-text">
-                                            <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
-                                            {f}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Block>
-
-                            <Block icon={Lightbulb} title="Challenges & How I Solved Them" testid="modal-challenges">
-                                <div className="space-y-3">
-                                    {project.challenges.map((c) => (
-                                        <div key={c.challenge} className="rounded-xl border border-border p-4 bg-surface">
-                                            <p className="text-sm font-medium text-text">
-                                                <span className="mr-2 rounded border border-control-border bg-bg px-2 py-0.5 font-mono text-[10px] uppercase text-text font-semibold">challenge</span>
-                                                {c.challenge}
-                                            </p>
-                                            <p className="mt-2 text-sm text-text-muted">
-                                                <span className="mr-2 rounded border border-border bg-badge-bg px-2 py-0.5 font-mono text-[10px] uppercase text-badge-text font-semibold">fix</span>
-                                                {c.solution}
-                                            </p>
-                                        </div>
-                                    ))}
+                                <div>
+                                    <span className="block text-[10px] font-mono uppercase tracking-wider text-text-muted">
+                                        Year
+                                    </span>
+                                    <span className="text-xs font-semibold text-text block mt-0.5">
+                                        {project.year}
+                                    </span>
                                 </div>
-                            </Block>
+                                <div>
+                                    <span className="block text-[10px] font-mono uppercase tracking-wider text-text-muted">
+                                        Status
+                                    </span>
+                                    <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 block mt-0.5">
+                                        {project.links?.live ? "Live" : "Code"}
+                                    </span>
+                                </div>
+                                <div className="col-span-3 pt-2 mt-1 border-t border-text/10 text-left">
+                                    <span className="block text-[10px] font-mono uppercase tracking-wider text-text-muted mb-1.5">
+                                        Core Stack
+                                    </span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {project.stack?.map((tech) => (
+                                            <TechChip key={tech} name={tech} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
 
-                            {project.screenshots.length > 0 && <Carousel screenshots={project.screenshots} title={project.title} />}
+                            {/* Main Grid: Narrative & Desktop Metadata Panel */}
+                            <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-6 lg:gap-8 items-start">
+                                {/* Case Study Sections */}
+                                <div className="space-y-4 sm:space-y-5 text-left">
+                                    {/* Problem & Solution Cards */}
+                                    {project.problem && project.solution && (
+                                        <div className="space-y-3">
+                                            {/* Problem Box */}
+                                            <div className="rounded-xl bg-amber-500/[0.06] border border-amber-500/20 p-3.5 sm:p-4">
+                                                <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider font-semibold text-amber-700 dark:text-amber-400 mb-1">
+                                                    <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                                                    <span>The Challenge / Problem</span>
+                                                </div>
+                                                <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
+                                                    {project.problem}
+                                                </p>
+                                            </div>
 
-                            <Block icon={BookOpen} title="What I Learned" testid="modal-learnings">
-                                <blockquote className="rounded-xl border-l-4 border-accent bg-bg px-5 py-4 text-sm italic leading-relaxed text-text-muted">
-                                    {project.learnings}
-                                </blockquote>
-                            </Block>
+                                            {/* Solution Box */}
+                                            <div className="rounded-xl bg-accent/[0.06] border border-accent/25 p-3.5 sm:p-4">
+                                                <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider font-semibold text-accent mb-1">
+                                                    <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                                                    <span>Engineered Solution</span>
+                                                </div>
+                                                <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
+                                                    {project.solution}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
 
-                            <Block icon={Rocket} title="Future Improvements" testid="modal-future">
-                                <ul className="flex flex-wrap gap-2">
-                                    {project.future.map((f) => (
-                                        <li key={f} className="rounded-full border border-border bg-bg px-3 py-1 font-mono text-xs text-text-muted">{f}</li>
-                                    ))}
-                                </ul>
-                            </Block>
+                                    {/* Key Features Section */}
+                                    {project.features && project.features.length > 0 && (
+                                        <section className="rounded-xl bg-surface border border-text/10 p-4 sm:p-5 space-y-2.5 shadow-xs">
+                                            <h4 className="flex items-center gap-2 text-xs sm:text-sm font-mono uppercase tracking-wider font-semibold text-accent">
+                                                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                                                <span>Key Functional Features</span>
+                                            </h4>
+                                            <ul className="space-y-2">
+                                                {project.features.map((feat, idx) => (
+                                                    <li
+                                                        key={idx}
+                                                        className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed text-text-muted"
+                                                    >
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
+                                                        <span>{feat}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </section>
+                                    )}
 
-                            <footer className="flex flex-col gap-3 border-t border-border pt-6">
-                                <p className="font-mono text-xs text-text-muted">{project.role}</p>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {project.tech.map((t) => (
-                                        <span key={t} className="badge-tech">
-                                            <TechIcon devicon={t === "socket.io" ? "socketdotio" : t === "swagger" ? "swagger" : t} invertDark={t === "express" || t === "nextdotjs" || t === "vercel" || t === "swagger"} className="h-3 w-3" />
-                                            {t}
+                                    {/* Engineering Highlights Section */}
+                                    {project.highlights && project.highlights.length > 0 && (
+                                        <section className="rounded-xl bg-surface border border-text/10 p-4 sm:p-5 space-y-2.5 shadow-xs">
+                                            <h4 className="flex items-center gap-2 text-xs sm:text-sm font-mono uppercase tracking-wider font-semibold text-accent">
+                                                <Layers className="h-4 w-4 shrink-0" />
+                                                <span>Engineering & Architecture</span>
+                                            </h4>
+                                            <ul className="space-y-2">
+                                                {project.highlights.map((high, idx) => (
+                                                    <li
+                                                        key={idx}
+                                                        className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed text-text-muted"
+                                                    >
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
+                                                        <span>{high}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </section>
+                                    )}
+
+                                    {/* What I'd Improve Next */}
+                                    {project.nextImprovement && (
+                                        <section className="rounded-xl bg-surface border border-text/10 p-4 sm:p-5 space-y-1.5 shadow-xs">
+                                            <h4 className="flex items-center gap-2 text-xs sm:text-sm font-mono uppercase tracking-wider font-semibold text-accent">
+                                                <Lightbulb className="h-4 w-4 text-amber-500 shrink-0" />
+                                                <span>Future Roadmap</span>
+                                            </h4>
+                                            <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
+                                                {project.nextImprovement}
+                                            </p>
+                                        </section>
+                                    )}
+                                </div>
+
+                                {/* Desktop Metadata Sidebar (Hidden on mobile to avoid duplication) */}
+                                <div className="hidden lg:block rounded-2xl p-5 sm:p-6 bg-surface border border-text/10 space-y-5 lg:sticky lg:top-4 shadow-xs">
+                                    <div className="flex items-center gap-2 pb-3 border-b border-text/10">
+                                        <Cpu className="h-4 w-4 text-accent" />
+                                        <h3 className="font-mono text-xs uppercase tracking-wider font-semibold text-text">
+                                            Project Metadata
+                                        </h3>
+                                    </div>
+
+                                    {/* Role & Year Grid */}
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <span className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-text-muted mb-1">
+                                                <User className="h-3.5 w-3.5" />
+                                                <span>Role</span>
+                                            </span>
+                                            <span className="text-sm font-semibold text-text">
+                                                {project.role}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-text-muted mb-1">
+                                                <Clock className="h-3.5 w-3.5" />
+                                                <span>Year</span>
+                                            </span>
+                                            <span className="text-sm font-semibold text-text">
+                                                {project.year}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Tech Stack */}
+                                    <div>
+                                        <span className="block text-xs uppercase tracking-wider text-text-muted mb-2">
+                                            Technologies Used
                                         </span>
-                                    ))}
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {project.stack?.map((tech) => (
+                                                <TechChip key={tech} name={tech} />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Core Skills */}
+                                    {project.skills && project.skills.length > 0 && (
+                                        <div className="pt-2 border-t border-text/10">
+                                            <span className="block text-xs uppercase tracking-wider text-text-muted mb-2">
+                                                Core Competencies
+                                            </span>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {project.skills.map((skill) => (
+                                                    <span
+                                                        key={skill}
+                                                        className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-accent/5 text-text border border-accent/20"
+                                                    >
+                                                        {skill}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                            </footer>
+                            </div>
                         </div>
-                    </motion.div>
+
+                        {/* Extra bottom scroll buffer */}
+                        <div className="h-6" />
+                    </div>
+
+                    {/* 3. FIXED BOTTOM FOOTER BAR (shrink-0: ALWAYS visible on both mobile and desktop) */}
+                    <div className="shrink-0 bg-surface border-t border-text/10 px-4 sm:px-6 py-2.5 sm:py-3 pb-[calc(0.65rem+env(safe-area-inset-bottom,0px))] flex items-center justify-between gap-2 z-20">
+                        {prevProject ? (
+                            <button
+                                type="button"
+                                onClick={() => onSelectProject?.(prevProject)}
+                                aria-label={`Go to previous project: ${prevProject.shortTitle || prevProject.title}`}
+                                className="inline-flex min-h-[36px] sm:min-h-[40px] items-center gap-1.5 text-xs sm:text-sm font-semibold text-text-muted hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-2.5 py-1"
+                            >
+                                <ArrowLeft className="h-3.5 w-3.5 shrink-0" />
+                                <span>
+                                    Prev:{" "}
+                                    <span className="hidden sm:inline font-bold">
+                                        {prevProject.shortTitle || prevProject.title}
+                                    </span>
+                                </span>
+                            </button>
+                        ) : (
+                            <div />
+                        )}
+
+                        {/* Project Position Indicator */}
+                        <span className="text-xs font-mono font-medium text-text-muted bg-text/[0.04] px-2.5 py-0.5 rounded-full border border-text/10">
+                            {currentIndex + 1} of {allProjects.length}
+                        </span>
+
+                        {nextProject ? (
+                            <button
+                                type="button"
+                                onClick={() => onSelectProject?.(nextProject)}
+                                aria-label={`Go to next project: ${nextProject.shortTitle || nextProject.title}`}
+                                className="inline-flex min-h-[36px] sm:min-h-[40px] items-center gap-1.5 text-xs sm:text-sm font-semibold text-text-muted hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-2.5 py-1"
+                            >
+                                <span>
+                                    Next:{" "}
+                                    <span className="hidden sm:inline font-bold">
+                                        {nextProject.shortTitle || nextProject.title}
+                                    </span>
+                                </span>
+                                <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                            </button>
+                        ) : (
+                            <div />
+                        )}
+                    </div>
                 </motion.div>
-            )}
+            </div>
         </AnimatePresence>
     );
 }

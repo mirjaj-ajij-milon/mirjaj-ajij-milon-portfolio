@@ -18,8 +18,8 @@ export const experience = [
             "Designed MongoDB schemas for team and player modules using MVC architecture and maintained clean separation between API layers.",
             "Validated 18+ API contracts with Postman for correctness and error handling, then deployed backend services to Render with production-grade environment configuration.",
         ],
-        tech: ["Node.js", "Express.js", "MongoDB", "Mongoose ODM", "JWT", "RBAC", "Postman", "Render"],
-        link: { label: "View Internship Certificate", url: "https://drive.google.com/file/d/1zhSsAfQEK46NwtIqXKLZBI7PlSiqJsxt/view?usp=drive_link" },
+        tech: ["Node.js", "Express.js", "MongoDB", "JWT", "Postman", "Render"],
+        link: { label: "View Internship Certificate", url: "https://drive.google.com/file/d/1zhSsAfQEK46NwtIqXKLZBI7PlSiqJsxt/view" },
     },
     {
         role: "Hackathon 1st Place Winner",
@@ -51,6 +51,6 @@ export const experience = [
             "Configured monorepo continuous deployment pipelines spanning Vercel serverless backends, Render API hosts, and Netlify frontends.",
         ],
         tech: ["React.js", "Node.js", "Express.js", "MongoDB", "WebRTC", "Socket.io", "Stripe"],
-        link: { label: "GitHub Portfolio", url: "https://github.com/Mirjaj786" },
+        link: { label: "GitHub Portfolio", url: "https://github.com/mirjaj-ajij-milon" },
     },
 ];

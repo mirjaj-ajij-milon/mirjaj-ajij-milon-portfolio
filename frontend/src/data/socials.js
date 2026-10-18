@@ -6,13 +6,13 @@ export const socials = [
     {
         name: "GitHub",
         icon: "github",
-        url: "https://github.com/Mirjaj786",
-        label: "GitHub — @Mirjaj786",
+        url: "https://github.com/mirjaj-ajij-milon",
+        label: "GitHub — @mirjaj-ajij-milon",
     },
     {
         name: "LinkedIn",
         icon: "linkedin",
-        url: "https://www.linkedin.com/in/mirjaj-ajij-milon-62ba05326",
+        url: "https://www.linkedin.com/in/mirjaj-ajij-milon/",
         label: "LinkedIn — Mirjaj Ajij Milon",
     },
     {
