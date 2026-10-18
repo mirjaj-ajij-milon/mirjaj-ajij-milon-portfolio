@@ -6,13 +6,13 @@ export const socials = [
     {
         name: "GitHub",
         icon: "github",
-        url: "https://github.com/mirjaj-ajij-milon",
-        label: "GitHub — @mirjaj-ajij-milon",
+        url: "https://github.com/Mirjaj786",
+        label: "GitHub — @Mirjaj786",
     },
     {
         name: "LinkedIn",
         icon: "linkedin",
-        url: "https://www.linkedin.com/in/mirjaj-ajij-milon",
+        url: "https://www.linkedin.com/in/mirjaj-ajij-milon-62ba05326",
         label: "LinkedIn — Mirjaj Ajij Milon",
     },
     {
@@ -24,7 +24,7 @@ export const socials = [
     {
         name: "GeeksforGeeks",
         icon: "gfg",
-        url: "https://www.geeksforgeeks.org/user/mirjajajijmilon",
+        url: "https://www.geeksforgeeks.org/profile/mirjajajijmilon",
         label: "GeeksforGeeks — @mirjajajijmilon",
     },
     {
@@ -44,5 +44,5 @@ export const socials = [
 // Coding platforms highlighted in the About DSA card
 export const codingProfiles = [
     { name: "LeetCode", url: "https://leetcode.com/u/mirjaj/" },
-    { name: "GeeksforGeeks", url: "https://www.geeksforgeeks.org/user/mirjajajijmilon" },
+    { name: "GeeksforGeeks", url: "https://www.geeksforgeeks.org/profile/mirjajajijmilon" },
 ];

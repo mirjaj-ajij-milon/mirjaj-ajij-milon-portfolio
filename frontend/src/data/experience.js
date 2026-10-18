@@ -43,7 +43,7 @@ export const experience = [
         org: "Independent Software Development",
         orgType: "Production Applications",
         dates: "May 2025 — Present",
-        location: "Kolkata, India",
+        location: "West Bengal, India",
         logoText: "DEV",
         bullets: [
             "Shipped 5 full-stack applications (BizPilot AI, Swadzo, TradeSphere, Vionex, and Wonderlust) solving real-world domain challenges.",
@@ -51,6 +51,6 @@ export const experience = [
             "Configured monorepo continuous deployment pipelines spanning Vercel serverless backends, Render API hosts, and Netlify frontends.",
         ],
         tech: ["React.js", "Node.js", "Express.js", "MongoDB", "WebRTC", "Socket.io", "Stripe"],
-        link: { label: "GitHub Portfolio", url: "https://github.com/mirjaj-ajij-milon" },
+        link: { label: "GitHub Portfolio", url: "https://github.com/Mirjaj786" },
     },
 ];

@@ -70,7 +70,7 @@ export const skillGroups = [
         category: "Core Competencies",
         icon: "GraduationCap",
         skills: [
-            { name: "DSA", lucide: "Braces", tier: "proficient", usedIn: ["257+ solved on LeetCode & GFG"] },
+            { name: "DSA", lucide: "Braces", tier: "proficient", usedIn: ["280+ solved on LeetCode & GFG"] },
             { name: "OOP", lucide: "Boxes", tier: "proficient", usedIn: ["Clean object models in Java & JS"] },
             { name: "REST API Design", lucide: "Network", tier: "proficient", usedIn: ["Gameonix, BizPilot, Swadzo"] },
             { name: "MVC Architecture", lucide: "Layers", tier: "proficient", usedIn: ["Gameonix, Wonderlust"] },
@@ -96,7 +96,7 @@ export const roadmap = [
 ];
 
 export const softSkills = [
-    { name: "Problem Solving", evidence: "257+ DSA problems on LeetCode & GFG; systematic debugging and optimization." },
+    { name: "Problem Solving", evidence: "280+ DSA problems on LeetCode & GFG; systematic debugging and optimization." },
     { name: "Hackathon Execution", evidence: "Won 1st Place at DIGONTOM Remote Hackathon 2026 delivering an AI copilot under tight deadlines." },
     { name: "API Engineering", evidence: "Shipped 18+ modular REST endpoints in production at Gameonix Esports with verified Postman test suites." },
 ];

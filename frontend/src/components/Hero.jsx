@@ -78,7 +78,7 @@ export default function Hero() {
                         ⚡ Ex-Backend Intern @ Gameonix
                     </span>
                     <span className="inline-flex max-w-full items-center text-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs font-medium text-text">
-                        📍 Kolkata, India
+                        📍 {site.location}
                     </span>
                 </motion.div>
 

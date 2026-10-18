@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mirjaj.dev/sitemap.xml
+Sitemap: https://mirjajajijmilonv2.netlify.app/sitemap.xml

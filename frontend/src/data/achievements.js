@@ -12,7 +12,7 @@ export const achievements = [
     },
     {
         icon: "Medal",
-        title: "257+ Problems Solved across LeetCode & GFG",
+        title: "280+ Problems Solved across LeetCode & GFG",
         detail: "Strong fundamentals in Data Structures & Algorithms, dynamic programming, trees, and graphs.",
     },
     {
@@ -48,18 +48,18 @@ export const codingProfiles = [
         stats: [
             { label: "Problems", value: "LeetCode" },
             { label: "Focus", value: "DSA" },
-            { label: "Total Solved", value: "150+" },
+            { label: "Total Solved", value: "147+" },
         ],
     },
     {
         platform: "GeeksforGeeks",
         handle: "@mirjajajijmilon",
-        url: "https://www.geeksforgeeks.org/user/mirjajajijmilon",
+        url: "https://www.geeksforgeeks.org/profile/mirjajajijmilon",
         icon: "gfg",
         stats: [
             { label: "Platform", value: "GFG" },
             { label: "Focus", value: "Algorithms" },
-            { label: "Total Solved", value: "130+" },
+            { label: "Total Solved", value: "124+" },
         ],
     },
 ];
