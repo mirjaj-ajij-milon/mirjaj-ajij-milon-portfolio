@@ -138,8 +138,8 @@ export const projects = [
         tech: ["react", "nodejs", "express", "mongodb", "passport", "tailwind"],
         links: {
             live: "https://tradesphere.netlify.app",
-            github: "https://github.com/Mirjaj786/TradeSphere",
-            docs: "https://github.com/Mirjaj786/TradeSphere#readme",
+            github: "https://github.com/mirjaj-ajij-milon/TradeSphere",
+            docs: "https://github.com/mirjaj-ajij-milon/TradeSphere#readme",
         },
         thumbnail: "/images/project_Images/tradesphere.png",
         overview:
@@ -194,9 +194,9 @@ export const projects = [
         ],
         tech: ["react", "nodejs", "express", "mongodb", "webrtc", "socket.io", "tailwind"],
         links: {
-            live: "https://github.com/Mirjaj786/Vionex",
-            github: "https://github.com/Mirjaj786/Vionex",
-            docs: "https://github.com/Mirjaj786/Vionex#readme",
+            live: "https://github.com/mirjaj-ajij-milon/Vionex",
+            github: "https://github.com/mirjaj-ajij-milon/Vionex",
+            docs: "https://github.com/mirjaj-ajij-milon/Vionex#readme",
         },
         thumbnail: "/images/project_Images/Vionex.png",
         overview:
@@ -251,8 +251,8 @@ export const projects = [
         tech: ["nodejs", "express", "mongodb", "passport", "cloudinary", "leaflet", "bootstrap"],
         links: {
             live: "https://wonderlust-marketplace.onrender.com",
-            github: "https://github.com/Mirjaj786/wonderlust",
-            docs: "https://github.com/Mirjaj786/wonderlust#readme",
+            github: "https://github.com/mirjaj-ajij-milon/wonderlust",
+            docs: "https://github.com/mirjaj-ajij-milon/wonderlust#readme",
         },
         thumbnail: "/images/project_Images/Wonderlust.png",
         overview:

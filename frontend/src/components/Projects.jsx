@@ -155,7 +155,7 @@ export default function Projects() {
 
             <Reveal className="mt-14 flex justify-center">
                 <External
-                    href="https://github.com/Mirjaj786?tab=repositories"
+                    href="https://github.com/mirjaj-ajij-milon?tab=repositories"
                     testid="projects-view-more"
                     className="btn-secondary !px-6 !py-3"
                 >
